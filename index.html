@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GreenBasket — Frais de la nature</title>
+<title>Bio d’Ivoire — Frais de la nature</title>
 <meta name="description" content="Fruits, légumes et produits 100 % bio livrés frais à votre porte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -280,7 +280,7 @@ footer{margin-top:22px;font-size:12.5px}
 </div></div>
 
 <header><div class="wrap">
-  <a href="#accueil" class="logo"><svg><use href="#logo"/></svg><span><strong><em>Green</em>Basket</strong><small>Frais de la nature</small></span></a>
+  <a href="#accueil" class="logo"><svg><use href="#logo"/></svg><span><strong><em>Bio</em> d’Ivoire</strong><small>Frais de la nature</small></span></a>
   <nav id="nav"><ul>
     <li><a href="#accueil" class="on">Accueil</a></li>
     <li><a href="#produits">Boutique</a></li>
@@ -319,7 +319,7 @@ footer{margin-top:22px;font-size:12.5px}
   <div class="farm">
     <div class="farm-img"><img src="images/fermier.jpg" alt="Producteur souriant tenant une cagette de légumes"></div>
     <div class="farm-txt">
-      <span class="kicker">Bienvenue chez GreenBasket</span>
+      <span class="kicker">Bienvenue chez Bio d’Ivoire</span>
       <h2>De notre ferme <br>à <em>votre table</em></h2>
       <p>Nous vous apportons les produits les plus frais, cueillis à la main dans des fermes de confiance. Une qualité sur laquelle vous pouvez compter, à chaque fois.</p>
       <a href="#pourquoi" class="btn sm">En savoir plus <svg class="i"><use href="#arrow"/></svg></a>
@@ -389,7 +389,7 @@ footer{margin-top:22px;font-size:12.5px}
 <footer id="contact"><div class="wrap">
   <div class="foot">
     <div>
-      <a href="#accueil" class="logo"><svg><use href="#logo"/></svg><span><strong><em>Green</em>Basket</strong><small>Frais de la nature</small></span></a>
+      <a href="#accueil" class="logo"><svg><use href="#logo"/></svg><span><strong><em>Bio</em> d’Ivoire</strong><small>Frais de la nature</small></span></a>
       <p>Votre source de confiance pour une alimentation fraîche, bio et saine. Nous prenons soin de vous et de la planète.</p>
       <div class="social">
         <a href="#" data-open="social" aria-label="Facebook">f</a><a href="#" data-open="social" aria-label="Instagram">◎</a><a href="#" data-open="social" aria-label="Twitter">𝕏</a><a href="#" data-open="social" aria-label="LinkedIn">in</a><a href="#" data-open="social" aria-label="YouTube">▶</a>
@@ -412,7 +412,7 @@ footer{margin-top:22px;font-size:12.5px}
       </div>
     </div>
   </div>
-  <div class="copy">© 2024 <b>GreenBasket</b>. Tous droits réservés.</div>
+  <div class="copy">© 2024 <b>Bio d’Ivoire</b>. Tous droits réservés.</div>
 </div></footer>
 
 <div class="overlay" id="overlay" data-close></div>
@@ -503,7 +503,7 @@ const PAGES = {
   confidentialite: ['Politique de confidentialité', `<p>Nous respectons votre vie privée.</p><h4>Données collectées</h4><p>Uniquement les informations nécessaires à votre commande et à votre compte : nom, adresse e-mail et contenu du panier.</p><h4>Utilisation</h4><p>Ces données servent à traiter vos commandes et, si vous l'avez demandé, à vous envoyer notre lettre d'information.</p><h4>Vos droits</h4><p>Vous pouvez demander la consultation ou la suppression de vos données via le formulaire de contact.</p>`],
   cgv: ['Conditions générales', `<p>En utilisant ce site, vous acceptez les présentes conditions.</p><h4>Commandes</h4><p>Les produits sont proposés dans la limite des stocks disponibles. Les prix sont indiqués par unité de vente.</p><h4>Livraison</h4><p>La livraison est gratuite dès 30 000 FCFA d'achat.</p><h4>Paiement</h4><p>Le paiement s'effectue par l'un des moyens indiqués en bas de page.</p>`],
   blog: ['Blog', `<h4>5 légumes de saison à cuisiner cette semaine</h4><p>Tomates, carottes, épinards… nos idées simples pour les mettre à l'honneur.</p><h4>Pourquoi choisir le bio ?</h4><p>Meilleur pour vous, votre famille et la nature : on vous explique tout.</p><h4>Bien conserver ses fruits et légumes</h4><p>Nos astuces pour garder toute leur fraîcheur plus longtemps.</p><p class="note">Les articles complets arrivent bientôt.</p>`],
-  carrieres: ['Carrières', `<p>Vous partagez notre passion pour une alimentation fraîche, bio et saine ? Rejoignez l'équipe GreenBasket.</p><p>Aucun poste n'est ouvert pour le moment, mais les candidatures spontanées sont les bienvenues.</p><button class="link" data-open="contact">Envoyer une candidature</button>`],
+  carrieres: ['Carrières', `<p>Vous partagez notre passion pour une alimentation fraîche, bio et saine ? Rejoignez l'équipe Bio d’Ivoire.</p><p>Aucun poste n'est ouvert pour le moment, mais les candidatures spontanées sont les bienvenues.</p><button class="link" data-open="contact">Envoyer une candidature</button>`],
   social: ['Réseaux sociaux', `<p>Nos pages sur les réseaux sociaux arrivent bientôt.</p><p>En attendant, abonnez-vous à notre lettre d'information en bas de page pour recevoir nos offres et nouveautés.</p>`]
 };
 
@@ -511,7 +511,7 @@ function openThing(key){
   if (key === 'cart') return show('#panier');
   if (key === 'search') { modal('Rechercher un produit', '<input type="search" id="q" placeholder="Tomates, pommes, œufs…" aria-label="Rechercher"><div id="results"></div>'); return search(''); }
   if (key === 'account') return account();
-  if (key === 'suivi') return modal('Suivre ma commande', '<form id="f-track"><label for="num">Numéro de commande</label><input id="num" required placeholder="GB-123456"><button class="btn sm">Suivre <svg class="i"><use href="#arrow"/></svg></button></form><div id="track"></div>');
+  if (key === 'suivi') return modal('Suivre ma commande', '<form id="f-track"><label for="num">Numéro de commande</label><input id="num" required placeholder="BI-123456"><button class="btn sm">Suivre <svg class="i"><use href="#arrow"/></svg></button></form><div id="track"></div>');
   if (key === 'contact') return modal('Contact', '<p>Une question, une remarque ? Écrivez-nous, nous vous répondrons rapidement.</p><form id="f-contact"><label for="cn">Nom</label><input id="cn" required><label for="ce">E-mail</label><input id="ce" type="email" required><label for="cm">Message</label><textarea id="cm" rows="4" required></textarea><button class="btn sm">Envoyer <svg class="i"><use href="#arrow"/></svg></button></form>');
   if (PAGES[key]) return modal(PAGES[key][0], PAGES[key][1]);
 }
@@ -532,7 +532,7 @@ function checkout(){
   const ids = Object.keys(cart);
   if (!ids.length) return notify('Votre panier est vide');
   const total = ids.reduce((s, i) => s + cart[i] * byId[i].prix, 0), items = ids.reduce((s, i) => s + cart[i], 0);
-  const n = 'GB-' + String(Date.now()).slice(-6);
+  const n = 'BI-' + String(Date.now()).slice(-6);
   const orders = store.get('gb_orders', []);
   orders.unshift({n, date: new Date().toLocaleDateString('fr-FR'), total, items});
   store.set('gb_orders', orders);

@@ -1,4 +1,4 @@
-# GreenBasket
+# Bio d’Ivoire
 
 Site vitrine d'une épicerie bio en ligne (une page, en français) : fruits, légumes et produits frais livrés à domicile.
 
