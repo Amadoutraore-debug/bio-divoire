@@ -116,8 +116,6 @@ nav a:hover,nav a.on{color:var(--lime);border-color:var(--lime)}
 .add:hover{filter:brightness(1.12)}
 .add.ok{background:var(--ink)}
 .dots{display:flex;justify-content:center;gap:7px;margin-top:20px}
-.dots i{width:7px;height:7px;border-radius:4px;background:#3c5f38}
-.dots i:first-child{width:22px;background:var(--lime)}
 
 /* Promo */
 .promo{position:relative;display:flex;align-items:center;background:linear-gradient(90deg,#2c6418,#3f7d1c 45%,#24521a);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;min-height:190px}
@@ -171,6 +169,52 @@ footer{margin-top:22px;font-size:12.5px}
 /* Notification */
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,90px);background:#fff;color:var(--ink);font-weight:600;font-size:14px;padding:12px 22px;border-radius:30px;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.35s;z-index:99}
 .toast.show{transform:translate(-50%,0)}
+
+/* Filtres, panier, fenêtres */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{background:var(--card);color:#fff;border:1.5px solid #23561f;border-radius:30px;padding:7px 16px;font-size:13px;font-weight:500;transition:.2s}
+.chip:hover{border-color:var(--lime)}.chip.on{background:var(--green);border-color:var(--green)}
+.dots button{width:7px;height:7px;border-radius:4px;background:#3c5f38;padding:0;transition:.2s}
+.dots button.on{width:22px;background:var(--lime)}
+.none{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px 0}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90;opacity:0;pointer-events:none;transition:.25s}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(410px,100%);background:var(--cream);color:var(--ink);z-index:95;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;visibility:hidden}
+.drawer.show{transform:none;visibility:visible}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-48%);width:min(540px,calc(100% - 32px));max-height:86vh;overflow:auto;background:var(--cream);color:var(--ink);border-radius:18px;padding:24px 26px 26px;z-index:95;opacity:0;visibility:hidden;transition:.25s}
+.modal.show{opacity:1;visibility:visible;transform:translate(-50%,-50%)}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.mh h3{font-size:20px;font-weight:600}
+.drawer .mh{padding:20px 22px 14px;margin:0;border-bottom:1px solid #e2dccf}
+.x{background:#e7e1d5;color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:20px;line-height:1;flex:none}
+.x:hover{background:#d8d0c0}
+.lines{flex:1;overflow:auto;padding:6px 22px}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #e2dccf}
+.line img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+.line b{display:block;font-size:14px;font-weight:600}
+.line small{color:#5e6b58;font-size:12px}
+.qty{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:14px;font-weight:600}
+.qty button{width:26px;height:26px;border-radius:50%;background:#e2dccf;color:var(--ink);font-size:16px;line-height:1}
+.lt{text-align:right}
+.rm{background:none;color:#b3261e;font-size:12px;text-decoration:underline;margin-top:6px}
+.empty{text-align:center;color:#5e6b58;padding:40px 0}
+.cfoot{padding:16px 22px 22px;border-top:1px solid #e2dccf}
+.cfoot p{font-size:12.5px;color:#5e6b58;margin-bottom:8px}
+.tot{display:flex;justify-content:space-between;font-size:17px;font-weight:700;margin-bottom:14px}
+.full{width:100%;justify-content:center}
+.modal p{font-size:14px;margin-bottom:10px;color:#2c4423}
+.modal h4{font-size:14.5px;margin:14px 0 4px}
+.modal label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+.modal input,.modal textarea{width:100%;font:inherit;font-size:14px;padding:10px 14px;border:1.5px solid #cfc8b8;border-radius:10px;background:#fff;color:var(--ink);outline:0}
+.modal input:focus,.modal textarea:focus{border-color:var(--green)}
+.modal form .btn{margin-top:16px}
+.note{font-size:12px!important;color:#6c7765!important;margin-top:12px}
+.res{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #e2dccf}
+.res img{width:52px;height:52px;object-fit:cover;border-radius:8px}
+.res div{flex:1}.res b{display:block;font-size:14px}.res small{font-size:12px;color:#5e6b58}
+.res .add{margin:0;padding:8px 14px}
+.box{background:#e9f3d8;border-radius:12px;padding:14px 16px;margin:10px 0}
+.link{background:none;color:var(--green-d);font-weight:600;text-decoration:underline;font-size:13px}
 
 @media(max-width:1000px){
   .grid5{grid-template-columns:repeat(3,1fr)}
@@ -243,12 +287,12 @@ footer{margin-top:22px;font-size:12.5px}
     <li><a href="#categories">Catégories</a></li>
     <li><a href="#offres">Offres</a></li>
     <li><a href="#apropos">À propos</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" data-open="contact">Contact</a></li>
   </ul></nav>
   <div class="tools">
-    <button aria-label="Rechercher"><svg class="i"><use href="#search"/></svg></button>
-    <button aria-label="Mon compte"><svg class="i"><use href="#user"/></svg></button>
-    <button aria-label="Panier"><svg class="i"><use href="#cart"/></svg><span class="badge" id="count">2</span></button>
+    <button aria-label="Rechercher" data-open="search"><svg class="i"><use href="#search"/></svg></button>
+    <button aria-label="Mon compte" data-open="account"><svg class="i"><use href="#user"/></svg></button>
+    <button aria-label="Panier" data-open="cart"><svg class="i"><use href="#cart"/></svg><span class="badge" id="count">0</span></button>
     <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')"><svg class="i"><use href="#menu"/></svg></button>
   </div>
 </div></header>
@@ -289,13 +333,13 @@ footer{margin-top:22px;font-size:12.5px}
 </div></section>
 
 <section class="sec" id="categories"><div class="wrap">
-  <div class="sec-h"><h2>Acheter par catégorie</h2><a href="#produits">Tout voir <svg class="i"><use href="#arrow"/></svg></a></div>
+  <div class="sec-h"><h2>Acheter par catégorie</h2><a href="#produits" data-cat="Tous">Tout voir <svg class="i"><use href="#arrow"/></svg></a></div>
   <div class="grid5">
-    <a href="#produits" class="cat"><img src="images/cat-legumes.jpg" alt="Légumes"><b>Légumes</b><small>120+ articles</small></a>
-    <a href="#produits" class="cat"><img src="images/cat-fruits.jpg" alt="Fruits"><b>Fruits</b><small>80+ articles</small></a>
-    <a href="#produits" class="cat"><img src="images/cat-herbes.jpg" alt="Herbes et verdures"><b>Herbes &amp; verdures</b><small>60+ articles</small></a>
-    <a href="#produits" class="cat"><img src="images/cat-laitiers.jpg" alt="Produits laitiers et œufs"><b>Laitiers &amp; œufs</b><small>40+ articles</small></a>
-    <a href="#produits" class="cat"><img src="images/cat-noix.jpg" alt="Noix et graines"><b>Noix &amp; graines</b><small>50+ articles</small></a>
+    <a href="#produits" class="cat" data-cat="Légumes"><img src="images/cat-legumes.jpg" alt="Légumes"><b>Légumes</b><small>120+ articles</small></a>
+    <a href="#produits" class="cat" data-cat="Fruits"><img src="images/cat-fruits.jpg" alt="Fruits"><b>Fruits</b><small>80+ articles</small></a>
+    <a href="#produits" class="cat" data-cat="Herbes &amp; verdures"><img src="images/cat-herbes.jpg" alt="Herbes et verdures"><b>Herbes &amp; verdures</b><small>60+ articles</small></a>
+    <a href="#produits" class="cat" data-cat="Laitiers &amp; œufs"><img src="images/cat-laitiers.jpg" alt="Produits laitiers et œufs"><b>Laitiers &amp; œufs</b><small>40+ articles</small></a>
+    <a href="#produits" class="cat" data-cat="Noix &amp; graines"><img src="images/cat-noix.jpg" alt="Noix et graines"><b>Noix &amp; graines</b><small>50+ articles</small></a>
   </div>
 </div></section>
 
@@ -305,7 +349,7 @@ footer{margin-top:22px;font-size:12.5px}
       <span class="kicker">Offre à durée limitée</span>
       <h2>Jusqu'à <em>-30&nbsp;%</em></h2>
       <h3>Sur les légumes frais</h3>
-      <a href="#produits" class="btn sm y">Profiter de l'offre <svg class="i"><use href="#arrow"/></svg></a>
+      <a href="#produits" class="btn sm y" data-cat="Légumes">Profiter de l'offre <svg class="i"><use href="#arrow"/></svg></a>
     </div>
     <img src="images/promo.jpg" alt="Panier de légumes frais">
     <div class="seal">Meilleure qualité<br>Meilleur prix</div>
@@ -323,15 +367,10 @@ footer{margin-top:22px;font-size:12.5px}
 </div></section>
 
 <section class="sec" id="produits"><div class="wrap">
-  <div class="sec-h"><h2>Notre sélection pour vous</h2><a href="#produits">Tout voir <svg class="i"><use href="#arrow"/></svg></a></div>
-  <div class="grid5">
-    <article class="prod"><button class="heart" aria-label="Ajouter aux favoris"><svg class="i"><use href="#heart"/></svg></button><img src="images/p-tomates.jpg" alt="Tomates bio"><b>Tomates bio</b><span class="price"><strong>2,49&nbsp;$</strong> / kg</span><button class="add">Ajouter au panier</button></article>
-    <article class="prod"><button class="heart" aria-label="Ajouter aux favoris"><svg class="i"><use href="#heart"/></svg></button><img src="images/p-carottes.jpg" alt="Carottes fraîches"><b>Carottes fraîches</b><span class="price"><strong>1,49&nbsp;$</strong> / kg</span><button class="add">Ajouter au panier</button></article>
-    <article class="prod"><button class="heart" aria-label="Ajouter aux favoris"><svg class="i"><use href="#heart"/></svg></button><img src="images/p-epinards.jpg" alt="Épinards verts"><b>Épinards verts</b><span class="price"><strong>1,29&nbsp;$</strong> / botte</span><button class="add">Ajouter au panier</button></article>
-    <article class="prod"><button class="heart" aria-label="Ajouter aux favoris"><svg class="i"><use href="#heart"/></svg></button><img src="images/p-pommes.jpg" alt="Pommes rouges"><b>Pommes rouges</b><span class="price"><strong>2,99&nbsp;$</strong> / kg</span><button class="add">Ajouter au panier</button></article>
-    <article class="prod"><button class="heart" aria-label="Ajouter aux favoris"><svg class="i"><use href="#heart"/></svg></button><img src="images/p-oeufs.jpg" alt="Œufs fermiers"><b>Œufs fermiers (x6)</b><span class="price"><strong>1,99&nbsp;$</strong> / boîte</span><button class="add">Ajouter au panier</button></article>
-  </div>
-  <div class="dots"><i></i><i></i><i></i></div>
+  <div class="sec-h"><h2>Notre sélection pour vous</h2><a href="#produits" data-all>Tout voir <svg class="i"><use href="#arrow"/></svg></a></div>
+  <div class="chips" id="chips"></div>
+  <div class="grid5" id="grid"></div>
+  <div class="dots" id="dots"></div>
 </div></section>
 
 <section class="sec"><div class="wrap">
@@ -353,17 +392,17 @@ footer{margin-top:22px;font-size:12.5px}
       <a href="#accueil" class="logo"><svg><use href="#logo"/></svg><span><strong><em>Green</em>Basket</strong><small>Frais de la nature</small></span></a>
       <p>Votre source de confiance pour une alimentation fraîche, bio et saine. Nous prenons soin de vous et de la planète.</p>
       <div class="social">
-        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="YouTube">▶</a>
+        <a href="#" data-open="social" aria-label="Facebook">f</a><a href="#" data-open="social" aria-label="Instagram">◎</a><a href="#" data-open="social" aria-label="Twitter">𝕏</a><a href="#" data-open="social" aria-label="LinkedIn">in</a><a href="#" data-open="social" aria-label="YouTube">▶</a>
       </div>
     </div>
     <div><h4>Liens rapides</h4><ul>
-      <li><a href="#produits">Boutique</a></li><li><a href="#categories">Catégories</a></li><li><a href="#offres">Offres</a></li><li><a href="#apropos">À propos</a></li><li><a href="#contact">Contact</a></li>
+      <li><a href="#produits">Boutique</a></li><li><a href="#categories">Catégories</a></li><li><a href="#offres">Offres</a></li><li><a href="#apropos">À propos</a></li><li><a href="#contact" data-open="contact">Contact</a></li>
     </ul></div>
     <div><h4>Service client</h4><ul>
-      <li><a href="#">Mon compte</a></li><li><a href="#">Suivre ma commande</a></li><li><a href="#">Expédition &amp; livraison</a></li><li><a href="#">Retours &amp; remboursements</a></li><li><a href="#">FAQ</a></li>
+      <li><a href="#" data-open="account">Mon compte</a></li><li><a href="#" data-open="suivi">Suivre ma commande</a></li><li><a href="#" data-open="livraison">Expédition &amp; livraison</a></li><li><a href="#" data-open="retours">Retours &amp; remboursements</a></li><li><a href="#" data-open="faq">FAQ</a></li>
     </ul></div>
     <div><h4>Informations</h4><ul>
-      <li><a href="#">Politique de confidentialité</a></li><li><a href="#">Conditions générales</a></li><li><a href="#">Politique de remboursement</a></li><li><a href="#">Blog</a></li><li><a href="#">Carrières</a></li>
+      <li><a href="#" data-open="confidentialite">Politique de confidentialité</a></li><li><a href="#" data-open="cgv">Conditions générales</a></li><li><a href="#" data-open="remboursement">Politique de remboursement</a></li><li><a href="#" data-open="blog">Blog</a></li><li><a href="#" data-open="carrieres">Carrières</a></li>
     </ul></div>
     <div><h4>Moyens de paiement</h4>
       <div class="pay"><span>VISA</span><span class="mc">mastercard</span><span class="pp">PayPal</span><span class="ax">AMEX</span></div>
@@ -376,22 +415,173 @@ footer{margin-top:22px;font-size:12.5px}
   <div class="copy">© 2024 <b>GreenBasket</b>. Tous droits réservés.</div>
 </div></footer>
 
+<div class="overlay" id="overlay" data-close></div>
+
+<aside class="drawer" id="panier" aria-label="Panier">
+  <div class="mh"><h3>Mon panier</h3><button class="x" data-close aria-label="Fermer">×</button></div>
+  <div class="lines" id="lines"></div>
+  <div class="cfoot">
+    <p id="ship"></p>
+    <div class="tot"><span>Total</span><span id="total">0,00 $</span></div>
+    <button class="btn full" id="checkout">Commander <svg class="i"><use href="#arrow"/></svg></button>
+  </div>
+</aside>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="mh"><h3 id="mt"></h3><button class="x" data-close aria-label="Fermer">×</button></div>
+  <div id="mb"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-const toast = document.getElementById('toast'), count = document.getElementById('count');
-let timer;
-function notify(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(timer); timer = setTimeout(() => toast.classList.remove('show'), 2200); }
-document.querySelectorAll('.add').forEach(b => b.addEventListener('click', () => {
-  count.textContent = +count.textContent + 1;
-  const nom = b.parentElement.querySelector('b').textContent;
-  b.textContent = 'Ajouté ✓'; b.classList.add('ok');
-  setTimeout(() => { b.textContent = 'Ajouter au panier'; b.classList.remove('ok'); }, 1500);
-  notify(nom + ' ajouté au panier');
-}));
-document.querySelectorAll('.heart').forEach(h => h.addEventListener('click', () => h.classList.toggle('on')));
-document.getElementById('news').addEventListener('submit', e => { e.preventDefault(); e.target.reset(); notify('Merci ! Vous êtes bien abonné.'); });
-document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => document.getElementById('nav').classList.remove('open')));
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d){ try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => n.toFixed(2).replace('.', ',') + ' $';
+
+const P = [
+  {id:'tomates',  nom:'Tomates bio',               prix:2.49,  u:'kg',        cat:'Légumes',           img:'p-tomates'},
+  {id:'carottes', nom:'Carottes fraîches',         prix:1.49,  u:'kg',        cat:'Légumes',           img:'p-carottes'},
+  {id:'epinards', nom:'Épinards verts',            prix:1.29,  u:'botte',     cat:'Herbes & verdures', img:'p-epinards'},
+  {id:'pommes',   nom:'Pommes rouges',             prix:2.99,  u:'kg',        cat:'Fruits',            img:'p-pommes'},
+  {id:'oeufs',    nom:'Œufs fermiers (x6)',        prix:1.99,  u:'boîte',     cat:'Laitiers & œufs',   img:'p-oeufs'},
+  {id:'panier',   nom:'Panier de légumes',         prix:9.90,  u:'panier',    cat:'Légumes',           img:'cat-legumes'},
+  {id:'corbeille',nom:'Corbeille de fruits',       prix:12.90, u:'corbeille', cat:'Fruits',            img:'cat-fruits'},
+  {id:'herbes',   nom:'Herbes aromatiques en pot', prix:3.49,  u:'pot',       cat:'Herbes & verdures', img:'cat-herbes'},
+  {id:'plateau',  nom:'Plateau fromage & lait',    prix:8.90,  u:'plateau',   cat:'Laitiers & œufs',   img:'cat-laitiers'},
+  {id:'noix',     nom:'Mélange de noix',           prix:5.49,  u:'250 g',     cat:'Noix & graines',    img:'cat-noix'}
+];
+const byId = Object.fromEntries(P.map(p => [p.id, p]));
+const CATS = ['Tous', 'Légumes', 'Fruits', 'Herbes & verdures', 'Laitiers & œufs', 'Noix & graines'];
+const PER = 5;
+let cart = store.get('gb_cart', {}), favs = store.get('gb_favs', []);
+for (const k of Object.keys(cart)) if (!byId[k]) delete cart[k];
+let filter = 'Tous', page = 0, showAll = false, timer;
+
+function notify(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(timer); timer = setTimeout(() => t.classList.remove('show'), 2400); }
+
+/* ---------- Boutique ---------- */
+function card(p){
+  return `<article class="prod"><button class="heart${favs.includes(p.id) ? ' on' : ''}" data-fav="${p.id}" aria-label="Ajouter aux favoris"><svg class="i"><use href="#heart"/></svg></button><img src="images/${p.img}.jpg" alt="${esc(p.nom)}"><b>${esc(p.nom)}</b><span class="price"><strong>${fmt(p.prix)}</strong> / ${p.u}</span><button class="add" data-add="${p.id}">Ajouter au panier</button></article>`;
+}
+function renderShop(){
+  const list = P.filter(p => filter === 'Tous' || p.cat === filter);
+  const pages = showAll ? 1 : Math.max(1, Math.ceil(list.length / PER));
+  if (page >= pages) page = 0;
+  const shown = showAll ? list : list.slice(page * PER, page * PER + PER);
+  $('#chips').innerHTML = CATS.map(c => `<button class="chip${c === filter ? ' on' : ''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');
+  $('#grid').innerHTML = shown.map(card).join('') || '<p class="none">Aucun produit dans cette catégorie.</p>';
+  $('#dots').innerHTML = pages > 1 ? Array.from({length: pages}, (_, i) => `<button class="${i === page ? 'on' : ''}" data-page="${i}" aria-label="Page ${i + 1}"></button>`).join('') : '';
+}
+
+/* ---------- Panier ---------- */
+function renderCart(){
+  const ids = Object.keys(cart);
+  const n = ids.reduce((s, i) => s + cart[i], 0), total = ids.reduce((s, i) => s + cart[i] * byId[i].prix, 0);
+  $('#count').textContent = n;
+  $('#lines').innerHTML = ids.length ? ids.map(i => { const p = byId[i]; return `<div class="line"><img src="images/${p.img}.jpg" alt=""><div><b>${esc(p.nom)}</b><small>${fmt(p.prix)} / ${p.u}</small><div class="qty"><button data-qty="${i}:-1" aria-label="Moins">−</button><span>${cart[i]}</span><button data-qty="${i}:1" aria-label="Plus">+</button></div></div><div class="lt"><b>${fmt(p.prix * cart[i])}</b><button class="rm" data-qty="${i}:0">Retirer</button></div></div>`; }).join('') : '<p class="empty">Votre panier est vide.</p>';
+  $('#total').textContent = fmt(total);
+  $('#ship').textContent = !ids.length ? '' : total >= 49 ? 'Livraison gratuite pour cette commande.' : `Plus que ${fmt(49 - total)} pour profiter de la livraison gratuite.`;
+  store.set('gb_cart', cart);
+}
+function add(id){ cart[id] = (cart[id] || 0) + 1; renderCart(); notify(byId[id].nom + ' ajouté au panier'); }
+
+/* ---------- Fenêtres ---------- */
+function closeAll(){ ['#overlay', '#panier', '#modal'].forEach(s => $(s).classList.remove('show')); document.body.style.overflow = ''; }
+function show(sel){ closeAll(); $('#overlay').classList.add('show'); $(sel).classList.add('show'); document.body.style.overflow = 'hidden'; }
+function modal(title, html){ $('#mt').textContent = title; $('#mb').innerHTML = html; show('#modal'); const f = $('#mb input, #mb textarea'); if (f) f.focus(); }
+
+const PAGES = {
+  livraison: ['Expédition & livraison', `<p>Nous livrons vos produits frais directement à votre porte.</p><h4>Frais de livraison</h4><p>La livraison est gratuite dès 49 $ d'achat.</p><h4>Fraîcheur</h4><p>Les produits sont préparés à la commande et transportés avec soin pour arriver frais chez vous.</p><h4>Suivi</h4><p>Vous pouvez suivre votre commande à tout moment avec votre numéro de commande.</p><button class="link" data-open="suivi">Suivre ma commande</button>`],
+  retours: ['Retours & remboursements', `<p>Votre satisfaction est notre priorité.</p><h4>Produit abîmé ou non conforme</h4><p>Signalez-le-nous rapidement après la livraison via le formulaire de contact, avec votre numéro de commande.</p><h4>Remboursement</h4><p>Après vérification, le produit concerné est remplacé ou remboursé.</p><button class="link" data-open="contact">Nous contacter</button>`],
+  remboursement: ['Politique de remboursement', `<p>Si un produit ne vous convient pas à la livraison, contactez-nous avec votre numéro de commande.</p><p>Après vérification, nous procédons au remplacement ou au remboursement du produit concerné.</p><button class="link" data-open="contact">Nous contacter</button>`],
+  faq: ['Questions fréquentes', `<h4>Vos produits sont-ils vraiment bio ?</h4><p>Oui, nos fruits et légumes sont 100 % bio et cultivés sans produits chimiques.</p><h4>D'où viennent vos produits ?</h4><p>De plus de 25 fermes locales de confiance, cueillis à la main.</p><h4>La livraison est-elle payante ?</h4><p>Elle est gratuite dès 49 $ d'achat.</p><h4>Comment suivre ma commande ?</h4><p>Avec le numéro reçu à la validation de votre commande.</p><h4>Quels moyens de paiement acceptez-vous ?</h4><p>Visa, Mastercard, PayPal et American Express.</p>`],
+  confidentialite: ['Politique de confidentialité', `<p>Nous respectons votre vie privée.</p><h4>Données collectées</h4><p>Uniquement les informations nécessaires à votre commande et à votre compte : nom, adresse e-mail et contenu du panier.</p><h4>Utilisation</h4><p>Ces données servent à traiter vos commandes et, si vous l'avez demandé, à vous envoyer notre lettre d'information.</p><h4>Vos droits</h4><p>Vous pouvez demander la consultation ou la suppression de vos données via le formulaire de contact.</p>`],
+  cgv: ['Conditions générales', `<p>En utilisant ce site, vous acceptez les présentes conditions.</p><h4>Commandes</h4><p>Les produits sont proposés dans la limite des stocks disponibles. Les prix sont indiqués par unité de vente.</p><h4>Livraison</h4><p>La livraison est gratuite dès 49 $ d'achat.</p><h4>Paiement</h4><p>Le paiement s'effectue par l'un des moyens indiqués en bas de page.</p>`],
+  blog: ['Blog', `<h4>5 légumes de saison à cuisiner cette semaine</h4><p>Tomates, carottes, épinards… nos idées simples pour les mettre à l'honneur.</p><h4>Pourquoi choisir le bio ?</h4><p>Meilleur pour vous, votre famille et la nature : on vous explique tout.</p><h4>Bien conserver ses fruits et légumes</h4><p>Nos astuces pour garder toute leur fraîcheur plus longtemps.</p><p class="note">Les articles complets arrivent bientôt.</p>`],
+  carrieres: ['Carrières', `<p>Vous partagez notre passion pour une alimentation fraîche, bio et saine ? Rejoignez l'équipe GreenBasket.</p><p>Aucun poste n'est ouvert pour le moment, mais les candidatures spontanées sont les bienvenues.</p><button class="link" data-open="contact">Envoyer une candidature</button>`],
+  social: ['Réseaux sociaux', `<p>Nos pages sur les réseaux sociaux arrivent bientôt.</p><p>En attendant, abonnez-vous à notre lettre d'information en bas de page pour recevoir nos offres et nouveautés.</p>`]
+};
+
+function openThing(key){
+  if (key === 'cart') return show('#panier');
+  if (key === 'search') { modal('Rechercher un produit', '<input type="search" id="q" placeholder="Tomates, pommes, œufs…" aria-label="Rechercher"><div id="results"></div>'); return search(''); }
+  if (key === 'account') return account();
+  if (key === 'suivi') return modal('Suivre ma commande', '<form id="f-track"><label for="num">Numéro de commande</label><input id="num" required placeholder="GB-123456"><button class="btn sm">Suivre <svg class="i"><use href="#arrow"/></svg></button></form><div id="track"></div>');
+  if (key === 'contact') return modal('Contact', '<p>Une question, une remarque ? Écrivez-nous, nous vous répondrons rapidement.</p><form id="f-contact"><label for="cn">Nom</label><input id="cn" required><label for="ce">E-mail</label><input id="ce" type="email" required><label for="cm">Message</label><textarea id="cm" rows="4" required></textarea><button class="btn sm">Envoyer <svg class="i"><use href="#arrow"/></svg></button></form>');
+  if (PAGES[key]) return modal(PAGES[key][0], PAGES[key][1]);
+}
+const norm = t => t.toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFD').replace(/[̀-ͯ]/g, '');
+function search(q){
+  const r = P.filter(p => norm(p.nom + ' ' + p.cat).includes(norm(q.trim())));
+  $('#results').innerHTML = r.map(p => `<div class="res"><img src="images/${p.img}.jpg" alt=""><div><b>${esc(p.nom)}</b><small>${fmt(p.prix)} / ${p.u} · ${esc(p.cat)}</small></div><button class="add" data-add="${p.id}">Ajouter</button></div>`).join('') || '<p class="empty">Aucun produit trouvé.</p>';
+}
+function account(){
+  const u = store.get('gb_user', null);
+  if (!u) return modal('Mon compte', '<p>Créez votre espace pour retrouver vos favoris et vos commandes.</p><form id="f-account"><label for="an">Nom</label><input id="an" required><label for="ae">E-mail</label><input id="ae" type="email" required><button class="btn sm">Créer mon espace <svg class="i"><use href="#arrow"/></svg></button></form><p class="note">Vos informations restent enregistrées sur cet appareil uniquement.</p>');
+  const orders = store.get('gb_orders', []);
+  const f = favs.filter(i => byId[i]).map(i => `<div class="res"><img src="images/${byId[i].img}.jpg" alt=""><div><b>${esc(byId[i].nom)}</b><small>${fmt(byId[i].prix)} / ${byId[i].u}</small></div><button class="add" data-add="${i}">Ajouter</button></div>`).join('') || '<p>Aucun favori pour le moment.</p>';
+  const o = orders.map(x => `<div class="res"><div><b>${esc(x.n)}</b><small>${esc(x.date)} · ${x.items} article(s)</small></div><b>${fmt(x.total)}</b></div>`).join('') || '<p>Aucune commande pour le moment.</p>';
+  modal('Mon compte', `<div class="box"><b>Bonjour ${esc(u.nom)} !</b><br><small>${esc(u.email)}</small></div><h4>Mes favoris</h4>${f}<h4>Mes commandes</h4>${o}<p style="margin-top:16px"><button class="link" data-act="logout">Se déconnecter</button></p>`);
+}
+function checkout(){
+  const ids = Object.keys(cart);
+  if (!ids.length) return notify('Votre panier est vide');
+  const total = ids.reduce((s, i) => s + cart[i] * byId[i].prix, 0), items = ids.reduce((s, i) => s + cart[i], 0);
+  const n = 'GB-' + String(Date.now()).slice(-6);
+  const orders = store.get('gb_orders', []);
+  orders.unshift({n, date: new Date().toLocaleDateString('fr-FR'), total, items});
+  store.set('gb_orders', orders);
+  cart = {}; renderCart();
+  modal('Commande enregistrée', `<div class="box"><b>Merci pour votre commande !</b><br>Numéro de commande : <b>${n}</b><br>Total : <b>${fmt(total)}</b> pour ${items} article(s)</div><p>Conservez ce numéro pour suivre votre commande.</p><button class="link" data-open="suivi">Suivre ma commande</button><p class="note">Aucun paiement n'a été effectué : le paiement en ligne n'est pas encore activé sur ce site.</p>`);
+}
+
+/* ---------- Événements ---------- */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-add],[data-fav],[data-cat],[data-all],[data-page],[data-qty],[data-open],[data-close],[data-act],#checkout');
+  if (!t) return;
+  const d = t.dataset;
+  if (d.add) { add(d.add); if (t.classList.contains('add')) { const old = t.textContent; t.textContent = 'Ajouté ✓'; t.classList.add('ok'); setTimeout(() => { t.textContent = old; t.classList.remove('ok'); }, 1300); } }
+  else if (d.fav) { favs = favs.includes(d.fav) ? favs.filter(i => i !== d.fav) : [...favs, d.fav]; store.set('gb_favs', favs); t.classList.toggle('on'); notify(favs.includes(d.fav) ? 'Ajouté aux favoris' : 'Retiré des favoris'); }
+  else if (d.cat) { filter = d.cat; page = 0; showAll = false; renderShop(); }
+  else if ('all' in d) { filter = 'Tous'; page = 0; showAll = true; renderShop(); }
+  else if (d.page) { page = +d.page; renderShop(); }
+  else if (d.qty) { const [id, q] = d.qty.split(':'); if (q === '0') delete cart[id]; else { cart[id] = (cart[id] || 0) + +q; if (cart[id] <= 0) delete cart[id]; } renderCart(); }
+  else if (d.open) { e.preventDefault(); $('#nav').classList.remove('open'); openThing(d.open); }
+  else if ('close' in d) closeAll();
+  else if (d.act === 'logout') { localStorage.removeItem('gb_user'); closeAll(); notify('Vous êtes déconnecté'); }
+  else if (t.id === 'checkout') checkout();
+});
+document.addEventListener('input', e => { if (e.target.id === 'q') search(e.target.value); });
+document.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  if (f.id === 'news') { f.reset(); notify('Merci ! Vous êtes bien abonné.'); }
+  else if (f.id === 'f-account') { store.set('gb_user', {nom: $('#an').value.trim(), email: $('#ae').value.trim()}); account(); notify('Votre espace est créé'); }
+  else if (f.id === 'f-contact') { closeAll(); notify('Merci ! Votre message a bien été pris en compte.'); }
+  else if (f.id === 'f-track') {
+    const num = $('#num').value.trim().toUpperCase(), o = store.get('gb_orders', []).find(x => x.n === num);
+    $('#track').innerHTML = o ? `<div class="box"><b>Commande ${esc(o.n)}</b><br>Passée le ${esc(o.date)} · ${o.items} article(s) · ${fmt(o.total)}<br>Statut : <b>en préparation</b></div>` : '<p class="empty">Aucune commande trouvée avec ce numéro.</p>';
+  }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => $('#nav').classList.remove('open')));
+
+/* Menu actif selon la section visible */
+const links = [...document.querySelectorAll('#nav a')].filter(a => !a.dataset.open);
+const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+function spy(){
+  let cur = secs[0];
+  for (const s of secs) if (s.getBoundingClientRect().top <= 140 && s.offsetTop >= cur.offsetTop) cur = s;
+  links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id));
+}
+addEventListener('scroll', spy, {passive: true});
+
+renderShop(); renderCart(); spy();
 </script>
 </body>
 </html>
