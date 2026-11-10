@@ -274,7 +274,7 @@ footer{margin-top:22px;font-size:12.5px}
 </svg>
 
 <div class="topbar"><div class="wrap">
-  <span><svg class="i"><use href="#truck"/></svg><span><b>LIVRAISON GRATUITE</b>&nbsp;dès 49&nbsp;$ d'achat</span></span>
+  <span><svg class="i"><use href="#truck"/></svg><span><b>LIVRAISON GRATUITE</b>&nbsp;dès 30&nbsp;000&nbsp;FCFA d'achat</span></span>
   <span><svg class="i"><use href="#leaf"/></svg>Mangez frais, vivez sainement</span>
   <span><svg class="i"><use href="#head"/></svg>Assistance 24h/24, 7j/7</span>
 </div></div>
@@ -422,7 +422,7 @@ footer{margin-top:22px;font-size:12.5px}
   <div class="lines" id="lines"></div>
   <div class="cfoot">
     <p id="ship"></p>
-    <div class="tot"><span>Total</span><span id="total">0,00 $</span></div>
+    <div class="tot"><span>Total</span><span id="total">0 FCFA</span></div>
     <button class="btn full" id="checkout">Commander <svg class="i"><use href="#arrow"/></svg></button>
   </div>
 </aside>
@@ -441,23 +441,23 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 };
 const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmt = n => n.toFixed(2).replace('.', ',') + ' $';
+const fmt = n => Math.round(n).toLocaleString('fr-FR').replace(/\s/g, '\u00a0') + '\u00a0FCFA';
 
 const P = [
-  {id:'tomates',  nom:'Tomates bio',               prix:2.49,  u:'kg',        cat:'Légumes',           img:'p-tomates'},
-  {id:'carottes', nom:'Carottes fraîches',         prix:1.49,  u:'kg',        cat:'Légumes',           img:'p-carottes'},
-  {id:'epinards', nom:'Épinards verts',            prix:1.29,  u:'botte',     cat:'Herbes & verdures', img:'p-epinards'},
-  {id:'pommes',   nom:'Pommes rouges',             prix:2.99,  u:'kg',        cat:'Fruits',            img:'p-pommes'},
-  {id:'oeufs',    nom:'Œufs fermiers (x6)',        prix:1.99,  u:'boîte',     cat:'Laitiers & œufs',   img:'p-oeufs'},
-  {id:'panier',   nom:'Panier de légumes',         prix:9.90,  u:'panier',    cat:'Légumes',           img:'cat-legumes'},
-  {id:'corbeille',nom:'Corbeille de fruits',       prix:12.90, u:'corbeille', cat:'Fruits',            img:'cat-fruits'},
-  {id:'herbes',   nom:'Herbes aromatiques en pot', prix:3.49,  u:'pot',       cat:'Herbes & verdures', img:'cat-herbes'},
-  {id:'plateau',  nom:'Plateau fromage & lait',    prix:8.90,  u:'plateau',   cat:'Laitiers & œufs',   img:'cat-laitiers'},
-  {id:'noix',     nom:'Mélange de noix',           prix:5.49,  u:'250 g',     cat:'Noix & graines',    img:'cat-noix'}
+  {id:'tomates',  nom:'Tomates bio',               prix:1500,  u:'kg',        cat:'Légumes',           img:'p-tomates'},
+  {id:'carottes', nom:'Carottes fraîches',         prix:900,  u:'kg',        cat:'Légumes',           img:'p-carottes'},
+  {id:'epinards', nom:'Épinards verts',            prix:800,  u:'botte',     cat:'Herbes & verdures', img:'p-epinards'},
+  {id:'pommes',   nom:'Pommes rouges',             prix:1800,  u:'kg',        cat:'Fruits',            img:'p-pommes'},
+  {id:'oeufs',    nom:'Œufs fermiers (x6)',        prix:1200,  u:'boîte',     cat:'Laitiers & œufs',   img:'p-oeufs'},
+  {id:'panier',   nom:'Panier de légumes',         prix:6000,  u:'panier',    cat:'Légumes',           img:'cat-legumes'},
+  {id:'corbeille',nom:'Corbeille de fruits',       prix:7500, u:'corbeille', cat:'Fruits',            img:'cat-fruits'},
+  {id:'herbes',   nom:'Herbes aromatiques en pot', prix:2000,  u:'pot',       cat:'Herbes & verdures', img:'cat-herbes'},
+  {id:'plateau',  nom:'Plateau fromage & lait',    prix:5500,  u:'plateau',   cat:'Laitiers & œufs',   img:'cat-laitiers'},
+  {id:'noix',     nom:'Mélange de noix',           prix:3500,  u:'250 g',     cat:'Noix & graines',    img:'cat-noix'}
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
 const CATS = ['Tous', 'Légumes', 'Fruits', 'Herbes & verdures', 'Laitiers & œufs', 'Noix & graines'];
-const PER = 5;
+const PER = 5, FREE = 30000;
 let cart = store.get('gb_cart', {}), favs = store.get('gb_favs', []);
 for (const k of Object.keys(cart)) if (!byId[k]) delete cart[k];
 let filter = 'Tous', page = 0, showAll = false, timer;
@@ -485,7 +485,7 @@ function renderCart(){
   $('#count').textContent = n;
   $('#lines').innerHTML = ids.length ? ids.map(i => { const p = byId[i]; return `<div class="line"><img src="images/${p.img}.jpg" alt=""><div><b>${esc(p.nom)}</b><small>${fmt(p.prix)} / ${p.u}</small><div class="qty"><button data-qty="${i}:-1" aria-label="Moins">−</button><span>${cart[i]}</span><button data-qty="${i}:1" aria-label="Plus">+</button></div></div><div class="lt"><b>${fmt(p.prix * cart[i])}</b><button class="rm" data-qty="${i}:0">Retirer</button></div></div>`; }).join('') : '<p class="empty">Votre panier est vide.</p>';
   $('#total').textContent = fmt(total);
-  $('#ship').textContent = !ids.length ? '' : total >= 49 ? 'Livraison gratuite pour cette commande.' : `Plus que ${fmt(49 - total)} pour profiter de la livraison gratuite.`;
+  $('#ship').textContent = !ids.length ? '' : total >= FREE ? 'Livraison gratuite pour cette commande.' : `Plus que ${fmt(FREE - total)} pour profiter de la livraison gratuite.`;
   store.set('gb_cart', cart);
 }
 function add(id){ cart[id] = (cart[id] || 0) + 1; renderCart(); notify(byId[id].nom + ' ajouté au panier'); }
@@ -496,12 +496,12 @@ function show(sel){ closeAll(); $('#overlay').classList.add('show'); $(sel).clas
 function modal(title, html){ $('#mt').textContent = title; $('#mb').innerHTML = html; show('#modal'); const f = $('#mb input, #mb textarea'); if (f) f.focus(); }
 
 const PAGES = {
-  livraison: ['Expédition & livraison', `<p>Nous livrons vos produits frais directement à votre porte.</p><h4>Frais de livraison</h4><p>La livraison est gratuite dès 49 $ d'achat.</p><h4>Fraîcheur</h4><p>Les produits sont préparés à la commande et transportés avec soin pour arriver frais chez vous.</p><h4>Suivi</h4><p>Vous pouvez suivre votre commande à tout moment avec votre numéro de commande.</p><button class="link" data-open="suivi">Suivre ma commande</button>`],
+  livraison: ['Expédition & livraison', `<p>Nous livrons vos produits frais directement à votre porte.</p><h4>Frais de livraison</h4><p>La livraison est gratuite dès 30 000 FCFA d'achat.</p><h4>Fraîcheur</h4><p>Les produits sont préparés à la commande et transportés avec soin pour arriver frais chez vous.</p><h4>Suivi</h4><p>Vous pouvez suivre votre commande à tout moment avec votre numéro de commande.</p><button class="link" data-open="suivi">Suivre ma commande</button>`],
   retours: ['Retours & remboursements', `<p>Votre satisfaction est notre priorité.</p><h4>Produit abîmé ou non conforme</h4><p>Signalez-le-nous rapidement après la livraison via le formulaire de contact, avec votre numéro de commande.</p><h4>Remboursement</h4><p>Après vérification, le produit concerné est remplacé ou remboursé.</p><button class="link" data-open="contact">Nous contacter</button>`],
   remboursement: ['Politique de remboursement', `<p>Si un produit ne vous convient pas à la livraison, contactez-nous avec votre numéro de commande.</p><p>Après vérification, nous procédons au remplacement ou au remboursement du produit concerné.</p><button class="link" data-open="contact">Nous contacter</button>`],
-  faq: ['Questions fréquentes', `<h4>Vos produits sont-ils vraiment bio ?</h4><p>Oui, nos fruits et légumes sont 100 % bio et cultivés sans produits chimiques.</p><h4>D'où viennent vos produits ?</h4><p>De plus de 25 fermes locales de confiance, cueillis à la main.</p><h4>La livraison est-elle payante ?</h4><p>Elle est gratuite dès 49 $ d'achat.</p><h4>Comment suivre ma commande ?</h4><p>Avec le numéro reçu à la validation de votre commande.</p><h4>Quels moyens de paiement acceptez-vous ?</h4><p>Visa, Mastercard, PayPal et American Express.</p>`],
+  faq: ['Questions fréquentes', `<h4>Vos produits sont-ils vraiment bio ?</h4><p>Oui, nos fruits et légumes sont 100 % bio et cultivés sans produits chimiques.</p><h4>D'où viennent vos produits ?</h4><p>De plus de 25 fermes locales de confiance, cueillis à la main.</p><h4>La livraison est-elle payante ?</h4><p>Elle est gratuite dès 30 000 FCFA d'achat.</p><h4>Comment suivre ma commande ?</h4><p>Avec le numéro reçu à la validation de votre commande.</p><h4>Quels moyens de paiement acceptez-vous ?</h4><p>Visa, Mastercard, PayPal et American Express.</p>`],
   confidentialite: ['Politique de confidentialité', `<p>Nous respectons votre vie privée.</p><h4>Données collectées</h4><p>Uniquement les informations nécessaires à votre commande et à votre compte : nom, adresse e-mail et contenu du panier.</p><h4>Utilisation</h4><p>Ces données servent à traiter vos commandes et, si vous l'avez demandé, à vous envoyer notre lettre d'information.</p><h4>Vos droits</h4><p>Vous pouvez demander la consultation ou la suppression de vos données via le formulaire de contact.</p>`],
-  cgv: ['Conditions générales', `<p>En utilisant ce site, vous acceptez les présentes conditions.</p><h4>Commandes</h4><p>Les produits sont proposés dans la limite des stocks disponibles. Les prix sont indiqués par unité de vente.</p><h4>Livraison</h4><p>La livraison est gratuite dès 49 $ d'achat.</p><h4>Paiement</h4><p>Le paiement s'effectue par l'un des moyens indiqués en bas de page.</p>`],
+  cgv: ['Conditions générales', `<p>En utilisant ce site, vous acceptez les présentes conditions.</p><h4>Commandes</h4><p>Les produits sont proposés dans la limite des stocks disponibles. Les prix sont indiqués par unité de vente.</p><h4>Livraison</h4><p>La livraison est gratuite dès 30 000 FCFA d'achat.</p><h4>Paiement</h4><p>Le paiement s'effectue par l'un des moyens indiqués en bas de page.</p>`],
   blog: ['Blog', `<h4>5 légumes de saison à cuisiner cette semaine</h4><p>Tomates, carottes, épinards… nos idées simples pour les mettre à l'honneur.</p><h4>Pourquoi choisir le bio ?</h4><p>Meilleur pour vous, votre famille et la nature : on vous explique tout.</p><h4>Bien conserver ses fruits et légumes</h4><p>Nos astuces pour garder toute leur fraîcheur plus longtemps.</p><p class="note">Les articles complets arrivent bientôt.</p>`],
   carrieres: ['Carrières', `<p>Vous partagez notre passion pour une alimentation fraîche, bio et saine ? Rejoignez l'équipe GreenBasket.</p><p>Aucun poste n'est ouvert pour le moment, mais les candidatures spontanées sont les bienvenues.</p><button class="link" data-open="contact">Envoyer une candidature</button>`],
   social: ['Réseaux sociaux', `<p>Nos pages sur les réseaux sociaux arrivent bientôt.</p><p>En attendant, abonnez-vous à notre lettre d'information en bas de page pour recevoir nos offres et nouveautés.</p>`]
