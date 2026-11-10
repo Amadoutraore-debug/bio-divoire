@@ -1,0 +1,19 @@
+Photos : Unsplash (licence Unsplash, usage gratuit y compris commercial, attribution non obligatoire).
+Page de chaque photo : https://unsplash.com/photos/<identifiant>
+
+hero         photo-1627989147125-a004d05946d3
+panier       photo-1690934167884-08c184b6c606
+fermier      photo-1690067698032-7b966be1d56e
+cat-legumes  photo-1597362925123-77861d3fbac7
+cat-fruits   photo-1628689469838-524a4a973b8e
+cat-herbes   photo-1621014882299-9ec639c125f1
+cat-laitiers photo-1628088062854-d1870b4553da
+cat-noix     photo-1605024344839-e6e41aea6b23
+promo        photo-1785670719039-97d931c57436
+p-tomates    photo-1546094096-0df4bcaaa337
+p-carottes   photo-1633380110125-f6e685676160
+p-epinards   photo-1576045057995-568f588f82fb
+p-pommes     photo-1670808439268-79d2cb00a46e
+p-oeufs      photo-1586802990181-a5771596eaea
+
+Le dossier "maquette" contient les anciennes images découpées dans la maquette (non utilisées par le site).
