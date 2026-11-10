@@ -214,6 +214,13 @@ footer{margin-top:22px;font-size:12.5px}
 .res div{flex:1}.res b{display:block;font-size:14px}.res small{font-size:12px;color:#5e6b58}
 .res .add{margin:0;padding:8px 14px}
 .box{background:#e9f3d8;border-radius:12px;padding:14px 16px;margin:10px 0}
+.recap{background:#e9f3d8;border-radius:12px;padding:12px 16px;margin:16px 0 4px;font-size:14px}
+.recap div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.recap .big{font-size:16.5px;font-weight:700;border-top:1px solid #cfe0b4;margin-top:6px;padding-top:9px}
+.modal a{color:var(--green-d);font-weight:600;text-decoration:underline}
+.note.ok{color:#2f6b17!important;font-weight:600}
+.note.err{color:#b3261e!important;font-weight:600}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
 .link{background:none;color:var(--green-d);font-weight:600;text-decoration:underline;font-size:13px}
 
 @media(max-width:1000px){
@@ -274,7 +281,7 @@ footer{margin-top:22px;font-size:12.5px}
 </svg>
 
 <div class="topbar"><div class="wrap">
-  <span><svg class="i"><use href="#truck"/></svg><span><b>LIVRAISON GRATUITE</b>&nbsp;dès 30&nbsp;000&nbsp;FCFA d'achat</span></span>
+  <span><svg class="i"><use href="#truck"/></svg><span><b>LIVRAISON GRATUITE</b>&nbsp;dès 20&nbsp;000&nbsp;FCFA d'achat</span></span>
   <span><svg class="i"><use href="#leaf"/></svg>Mangez frais, vivez sainement</span>
   <span><svg class="i"><use href="#head"/></svg>Assistance 24h/24, 7j/7</span>
 </div></div>
@@ -399,7 +406,7 @@ footer{margin-top:22px;font-size:12.5px}
       <li><a href="#produits">Boutique</a></li><li><a href="#categories">Catégories</a></li><li><a href="#offres">Offres</a></li><li><a href="#apropos">À propos</a></li><li><a href="#contact" data-open="contact">Contact</a></li>
     </ul></div>
     <div><h4>Service client</h4><ul>
-      <li><a href="#" data-open="account">Mon compte</a></li><li><a href="#" data-open="suivi">Suivre ma commande</a></li><li><a href="#" data-open="livraison">Expédition &amp; livraison</a></li><li><a href="#" data-open="retours">Retours &amp; remboursements</a></li><li><a href="#" data-open="faq">FAQ</a></li>
+      <li><a href="#" data-open="account">Mes commandes</a></li><li><a href="#" data-open="suivi">Suivre ma commande</a></li><li><a href="#" data-open="livraison">Expédition &amp; livraison</a></li><li><a href="#" data-open="retours">Retours &amp; remboursements</a></li><li><a href="#" data-open="faq">FAQ</a></li>
     </ul></div>
     <div><h4>Informations</h4><ul>
       <li><a href="#" data-open="confidentialite">Politique de confidentialité</a></li><li><a href="#" data-open="cgv">Conditions générales</a></li><li><a href="#" data-open="remboursement">Politique de remboursement</a></li><li><a href="#" data-open="blog">Blog</a></li><li><a href="#" data-open="carrieres">Carrières</a></li>
@@ -422,7 +429,7 @@ footer{margin-top:22px;font-size:12.5px}
   <div class="lines" id="lines"></div>
   <div class="cfoot">
     <p id="ship"></p>
-    <div class="tot"><span>Total</span><span id="total">0 FCFA</span></div>
+    <div class="tot"><span>Sous-total</span><span id="total">0 FCFA</span></div>
     <button class="btn full" id="checkout">Commander <svg class="i"><use href="#arrow"/></svg></button>
   </div>
 </aside>
@@ -434,6 +441,7 @@ footer{margin-top:22px;font-size:12.5px}
 
 <div class="toast" id="toast"></div>
 
+<script src="config.js?v=1"></script>
 <script>
 const $ = s => document.querySelector(s);
 const store = {
@@ -492,7 +500,8 @@ const P = [
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
 const CATS = ['Tous', 'Légumes', 'Fruits', 'Herbes & verdures', 'Laitiers & œufs', 'Noix & graines'];
-const PER = 10, FREE = 30000;
+const CFG = window.BIO_CONFIG || {}, ONLINE = !!(CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY);
+const PER = 10, FREE = CFG.LIVRAISON_GRATUITE || 20000;
 let cart = store.get('gb_cart', {}), favs = store.get('gb_favs', []);
 for (const k of Object.keys(cart)) if (!byId[k]) delete cart[k];
 let filter = 'Tous', page = 0, showAll = false, timer;
@@ -531,12 +540,12 @@ function show(sel){ closeAll(); $('#overlay').classList.add('show'); $(sel).clas
 function modal(title, html){ $('#mt').textContent = title; $('#mb').innerHTML = html; show('#modal'); const f = $('#mb input, #mb textarea'); if (f) f.focus(); }
 
 const PAGES = {
-  livraison: ['Expédition & livraison', `<p>Nous livrons vos produits frais directement à votre porte.</p><h4>Frais de livraison</h4><p>La livraison est gratuite dès 30 000 FCFA d'achat.</p><h4>Fraîcheur</h4><p>Les produits sont préparés à la commande et transportés avec soin pour arriver frais chez vous.</p><h4>Suivi</h4><p>Vous pouvez suivre votre commande à tout moment avec votre numéro de commande.</p><button class="link" data-open="suivi">Suivre ma commande</button>`],
+  livraison: ['Expédition & livraison', `<p>Nous livrons vos produits frais directement à votre porte.</p><h4>Frais de livraison</h4><p>La livraison est gratuite dès 20 000 FCFA d'achat. En dessous, les frais dépendent de la distance entre la boutique et votre position.</p><h4>Fraîcheur</h4><p>Les produits sont préparés à la commande et transportés avec soin pour arriver frais chez vous.</p><h4>Suivi</h4><p>Vous pouvez suivre votre commande à tout moment avec votre numéro de commande.</p><button class="link" data-open="suivi">Suivre ma commande</button>`],
   retours: ['Retours & remboursements', `<p>Votre satisfaction est notre priorité.</p><h4>Produit abîmé ou non conforme</h4><p>Signalez-le-nous rapidement après la livraison via le formulaire de contact, avec votre numéro de commande.</p><h4>Remboursement</h4><p>Après vérification, le produit concerné est remplacé ou remboursé.</p><button class="link" data-open="contact">Nous contacter</button>`],
   remboursement: ['Politique de remboursement', `<p>Si un produit ne vous convient pas à la livraison, contactez-nous avec votre numéro de commande.</p><p>Après vérification, nous procédons au remplacement ou au remboursement du produit concerné.</p><button class="link" data-open="contact">Nous contacter</button>`],
-  faq: ['Questions fréquentes', `<h4>Vos produits sont-ils vraiment bio ?</h4><p>Oui, nos fruits et légumes sont 100 % bio et cultivés sans produits chimiques.</p><h4>D'où viennent vos produits ?</h4><p>De plus de 25 fermes locales de confiance, cueillis à la main.</p><h4>La livraison est-elle payante ?</h4><p>Elle est gratuite dès 30 000 FCFA d'achat.</p><h4>Comment suivre ma commande ?</h4><p>Avec le numéro reçu à la validation de votre commande.</p><h4>Quels moyens de paiement acceptez-vous ?</h4><p>Visa, Mastercard, PayPal et American Express.</p>`],
-  confidentialite: ['Politique de confidentialité', `<p>Nous respectons votre vie privée.</p><h4>Données collectées</h4><p>Uniquement les informations nécessaires à votre commande et à votre compte : nom, adresse e-mail et contenu du panier.</p><h4>Utilisation</h4><p>Ces données servent à traiter vos commandes et, si vous l'avez demandé, à vous envoyer notre lettre d'information.</p><h4>Vos droits</h4><p>Vous pouvez demander la consultation ou la suppression de vos données via le formulaire de contact.</p>`],
-  cgv: ['Conditions générales', `<p>En utilisant ce site, vous acceptez les présentes conditions.</p><h4>Commandes</h4><p>Les produits sont proposés dans la limite des stocks disponibles. Les prix sont indiqués par unité de vente.</p><h4>Livraison</h4><p>La livraison est gratuite dès 30 000 FCFA d'achat.</p><h4>Paiement</h4><p>Le paiement s'effectue par l'un des moyens indiqués en bas de page.</p>`],
+  faq: ['Questions fréquentes', `<h4>Vos produits sont-ils vraiment bio ?</h4><p>Oui, nos fruits et légumes sont 100 % bio et cultivés sans produits chimiques.</p><h4>D'où viennent vos produits ?</h4><p>De plus de 25 fermes locales de confiance, cueillis à la main.</p><h4>La livraison est-elle payante ?</h4><p>Elle est gratuite dès 20 000 FCFA d'achat. En dessous, son prix dépend de la distance.</p><h4>Faut-il créer un compte pour commander ?</h4><p>Non. Il suffit d'indiquer votre nom, votre numéro de téléphone et votre position.</p><h4>Comment suivre ma commande ?</h4><p>Avec le numéro reçu à la validation de votre commande.</p><h4>Quels moyens de paiement acceptez-vous ?</h4><p>Visa, Mastercard, PayPal et American Express.</p>`],
+  confidentialite: ['Politique de confidentialité', `<p>Nous respectons votre vie privée.</p><h4>Données collectées</h4><p>Uniquement les informations nécessaires à votre commande : nom, numéro de téléphone, position de livraison et produits commandés.</p><h4>Utilisation</h4><p>Ces données servent uniquement à préparer et à livrer vos commandes.</p><h4>Vos droits</h4><p>Vous pouvez demander la consultation ou la suppression de vos données via le formulaire de contact.</p>`],
+  cgv: ['Conditions générales', `<p>En utilisant ce site, vous acceptez les présentes conditions.</p><h4>Commandes</h4><p>Les produits sont proposés dans la limite des stocks disponibles. Les prix sont indiqués par unité de vente.</p><h4>Livraison</h4><p>La livraison est gratuite dès 20 000 FCFA d'achat.</p><h4>Paiement</h4><p>Le paiement s'effectue par l'un des moyens indiqués en bas de page.</p>`],
   blog: ['Blog', `<h4>5 légumes de saison à cuisiner cette semaine</h4><p>Tomates, carottes, épinards… nos idées simples pour les mettre à l'honneur.</p><h4>Pourquoi choisir le bio ?</h4><p>Meilleur pour vous, votre famille et la nature : on vous explique tout.</p><h4>Bien conserver ses fruits et légumes</h4><p>Nos astuces pour garder toute leur fraîcheur plus longtemps.</p><p class="note">Les articles complets arrivent bientôt.</p>`],
   carrieres: ['Carrières', `<p>Vous partagez notre passion pour une alimentation fraîche, bio et saine ? Rejoignez l'équipe Bio d’Ivoire.</p><p>Aucun poste n'est ouvert pour le moment, mais les candidatures spontanées sont les bienvenues.</p><button class="link" data-open="contact">Envoyer une candidature</button>`],
   social: ['Réseaux sociaux', `<p>Nos pages sur les réseaux sociaux arrivent bientôt.</p><p>En attendant, abonnez-vous à notre lettre d'information en bas de page pour recevoir nos offres et nouveautés.</p>`]
@@ -546,7 +555,7 @@ function openThing(key){
   if (key === 'cart') return show('#panier');
   if (key === 'search') { modal('Rechercher un produit', '<input type="search" id="q" placeholder="Tomates, pommes, œufs…" aria-label="Rechercher"><div id="results"></div>'); return search(''); }
   if (key === 'account') return account();
-  if (key === 'suivi') return modal('Suivre ma commande', '<form id="f-track"><label for="num">Numéro de commande</label><input id="num" required placeholder="BI-123456"><button class="btn sm">Suivre <svg class="i"><use href="#arrow"/></svg></button></form><div id="track"></div>');
+  if (key === 'suivi') return modal('Suivre ma commande', '<form id="f-track"><label for="num">Numéro de commande</label><input id="num" required placeholder="BI-A2B3C4"><button class="btn sm">Suivre <svg class="i"><use href="#arrow"/></svg></button></form><div id="track"></div>');
   if (key === 'contact') return modal('Contact', '<p>Une question, une remarque ? Écrivez-nous, nous vous répondrons rapidement.</p><form id="f-contact"><label for="cn">Nom</label><input id="cn" required><label for="ce">E-mail</label><input id="ce" type="email" required><label for="cm">Message</label><textarea id="cm" rows="4" required></textarea><button class="btn sm">Envoyer <svg class="i"><use href="#arrow"/></svg></button></form>');
   if (PAGES[key]) return modal(PAGES[key][0], PAGES[key][1]);
 }
@@ -556,23 +565,115 @@ function search(q){
   $('#results').innerHTML = r.map(p => `<div class="res"><img src="images/${p.img}.jpg" alt=""><div><b>${esc(p.nom)}</b><small>${fmt(p.prix)} / ${p.u} · ${esc(p.cat)}</small></div><button class="add" data-add="${p.id}">Ajouter</button></div>`).join('') || '<p class="empty">Aucun produit trouvé.</p>';
 }
 function account(){
-  const u = store.get('gb_user', null);
-  if (!u) return modal('Mon compte', '<p>Créez votre espace pour retrouver vos favoris et vos commandes.</p><form id="f-account"><label for="an">Nom</label><input id="an" required><label for="ae">E-mail</label><input id="ae" type="email" required><button class="btn sm">Créer mon espace <svg class="i"><use href="#arrow"/></svg></button></form><p class="note">Vos informations restent enregistrées sur cet appareil uniquement.</p>');
   const orders = store.get('gb_orders', []);
   const f = favs.filter(i => byId[i]).map(i => `<div class="res"><img src="images/${byId[i].img}.jpg" alt=""><div><b>${esc(byId[i].nom)}</b><small>${fmt(byId[i].prix)} / ${byId[i].u}</small></div><button class="add" data-add="${i}">Ajouter</button></div>`).join('') || '<p>Aucun favori pour le moment.</p>';
   const o = orders.map(x => `<div class="res"><div><b>${esc(x.n)}</b><small>${esc(x.date)} · ${x.items} article(s)</small></div><b>${fmt(x.total)}</b></div>`).join('') || '<p>Aucune commande pour le moment.</p>';
-  modal('Mon compte', `<div class="box"><b>Bonjour ${esc(u.nom)} !</b><br><small>${esc(u.email)}</small></div><h4>Mes favoris</h4>${f}<h4>Mes commandes</h4>${o}<p style="margin-top:16px"><button class="link" data-act="logout">Se déconnecter</button></p>`);
+  modal('Mes commandes & favoris', `<p>Aucune inscription n'est nécessaire pour commander.</p><h4>Mes commandes passées sur cet appareil</h4>${o}<p><button class="link" data-open="suivi">Suivre une commande</button></p><h4>Mes favoris</h4>${f}`);
+}
+
+/* ---------- Commande : téléphone, position GPS, livraison selon la distance ---------- */
+const STATUTS = {nouvelle: 'reçue', preparation: 'en préparation', livraison: 'en cours de livraison', livree: 'livrée', annulee: 'annulée'};
+let pos = null;
+const subtotal = () => Object.keys(cart).reduce((s, i) => s + cart[i] * byId[i].prix, 0);
+function km(a, b){
+  const R = 6371, r = x => x * Math.PI / 180, dLat = r(b.lat - a.lat), dLng = r(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+/* 0 = gratuite ; undefined = position pas encore connue ; null = hors tranches, à confirmer par téléphone */
+function fee(sub, dist){
+  if (sub >= FREE) return 0;
+  if (dist == null) return undefined;
+  const t = (CFG.TARIFS || []).find(t => dist <= t.jusqua);
+  return t ? t.prix : null;
+}
+function recap(){
+  const sub = subtotal(), dist = pos && CFG.BOUTIQUE ? km(CFG.BOUTIQUE, pos) : null, f = fee(sub, dist);
+  const liv = f === 0 ? 'Gratuite' : f === undefined ? 'Calculée avec votre position' : f === null ? 'À confirmer par téléphone' : fmt(f);
+  const el = $('#recap');
+  if (el) el.innerHTML = `<div><span>Sous-total</span><b>${fmt(sub)}</b></div><div><span>Livraison${dist != null ? ` (environ ${dist.toFixed(1).replace('.', ',')} km)` : ''}</span><b>${liv}</b></div><div class="big"><span>Total</span><b>${fmt(sub + (f || 0))}${f === null ? ' + livraison' : ''}</b></div>`;
+  return {sub, dist, f};
 }
 function checkout(){
-  const ids = Object.keys(cart);
-  if (!ids.length) return notify('Votre panier est vide');
-  const total = ids.reduce((s, i) => s + cart[i] * byId[i].prix, 0), items = ids.reduce((s, i) => s + cart[i], 0);
-  const n = 'BI-' + String(Date.now()).slice(-6);
-  const orders = store.get('gb_orders', []);
-  orders.unshift({n, date: new Date().toLocaleDateString('fr-FR'), total, items});
-  store.set('gb_orders', orders);
+  if (!Object.keys(cart).length) return notify('Votre panier est vide');
+  const last = store.get('bio_client', {});
+  pos = null;
+  modal('Valider ma commande', `<form id="f-order">
+    <label for="on">Nom</label><input id="on" required maxlength="80" autocomplete="name" value="${esc(last.nom || '')}">
+    <label for="ot">Numéro de téléphone</label><input id="ot" type="tel" required inputmode="tel" autocomplete="tel" pattern="[0-9+ .\\-]{8,20}" title="Entre 8 et 20 chiffres" placeholder="07 00 00 00 00" value="${esc(last.tel || '')}">
+    <label>Position de livraison</label>
+    <button type="button" class="btn sm" data-act="gps"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6.200-7-12a7 7 0 0114 0c0 5.800-7 12-7 12z"/><circle cx="12" cy="9" r="2.500"/></svg> Utiliser ma position GPS</button>
+    <p id="gps" class="note">Votre position sert à vous livrer au bon endroit et à calculer les frais de livraison.</p>
+    <label for="oa">Repère ou indications (facultatif)</label><textarea id="oa" rows="2" maxlength="300" placeholder="Quartier, rue, bâtiment, couleur du portail…"></textarea>
+    <div class="recap" id="recap"></div>
+    <button class="btn full" id="send">Valider la commande <svg class="i"><use href="#arrow"/></svg></button>
+    <p class="note">Aucune inscription nécessaire. Paiement à la livraison.</p>
+  </form>`);
+  recap();
+}
+function locate(){
+  const el = $('#gps');
+  if (!el) return;
+  el.className = 'note';
+  if (!navigator.geolocation) { el.textContent = 'Votre navigateur ne permet pas la localisation.'; el.classList.add('err'); return; }
+  el.textContent = 'Recherche de votre position…';
+  navigator.geolocation.getCurrentPosition(p => {
+    pos = {lat: +p.coords.latitude.toFixed(6), lng: +p.coords.longitude.toFixed(6), acc: Math.round(p.coords.accuracy)};
+    if (!$('#gps')) return;
+    el.innerHTML = `✓ Position trouvée (précision ± ${pos.acc} m). <a href="https://www.google.com/maps?q=${pos.lat},${pos.lng}" target="_blank" rel="noopener">Voir sur la carte</a>`;
+    el.classList.add('ok');
+    recap();
+  }, e => {
+    pos = null;
+    if (!$('#gps')) return;
+    el.textContent = e.code === 1 ? 'Localisation refusée. Autorisez la position pour ce site dans votre navigateur, puis réessayez.' : 'Position introuvable. Activez le GPS de votre téléphone, puis réessayez.';
+    el.classList.add('err');
+    recap();
+  }, {enableHighAccuracy: true, timeout: 20000, maximumAge: 0});
+}
+const api = (path, body) => fetch(CFG.SUPABASE_URL + '/rest/v1/' + path, {method: 'POST', headers: {apikey: CFG.SUPABASE_ANON_KEY, Authorization: 'Bearer ' + CFG.SUPABASE_ANON_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal'}, body: JSON.stringify(body)});
+async function sendOrder(o){
+  if (!ONLINE) {
+    const all = store.get('bio_orders_demo', []);
+    all.unshift({...o, id: Date.now(), statut: 'nouvelle', created_at: new Date().toISOString()});
+    store.set('bio_orders_demo', all);
+    return;
+  }
+  const r = await api('bio_orders', o);
+  if (!r.ok) throw new Error(await r.text());
+}
+async function placeOrder(){
+  if (!pos) { const el = $('#gps'); el.className = 'note err'; el.textContent = 'Indiquez votre position GPS pour valider la commande.'; el.scrollIntoView({block: 'center'}); return; }
+  const {sub, dist, f} = recap(), ids = Object.keys(cart), btn = $('#send');
+  const o = {
+    ref: 'BI-' + Array.from({length: 6}, () => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.floor(Math.random() * 32)]).join(''),
+    client_nom: $('#on').value.trim(), telephone: $('#ot').value.trim(),
+    lat: pos.lat, lng: pos.lng, precision_m: pos.acc, distance_km: dist == null ? null : Math.round(dist * 10) / 10,
+    repere: $('#oa').value.trim() || null,
+    articles: ids.map(i => ({id: i, nom: byId[i].nom, qte: cart[i], prix: byId[i].prix, unite: byId[i].u})),
+    sous_total: sub, livraison: f == null ? null : f, total: sub + (f || 0)
+  };
+  btn.disabled = true; btn.textContent = 'Envoi en cours…';
+  try { await sendOrder(o); }
+  catch (err) { btn.disabled = false; btn.textContent = 'Valider la commande'; notify("La commande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez."); return; }
+  store.set('bio_client', {nom: o.client_nom, tel: o.telephone});
+  const mine = store.get('gb_orders', []);
+  mine.unshift({n: o.ref, date: new Date().toLocaleDateString('fr-FR'), total: o.total, items: ids.reduce((s, i) => s + cart[i], 0)});
+  store.set('gb_orders', mine);
   cart = {}; renderCart();
-  modal('Commande enregistrée', `<div class="box"><b>Merci pour votre commande !</b><br>Numéro de commande : <b>${n}</b><br>Total : <b>${fmt(total)}</b> pour ${items} article(s)</div><p>Conservez ce numéro pour suivre votre commande.</p><button class="link" data-open="suivi">Suivre ma commande</button><p class="note">Aucun paiement n'a été effectué : le paiement en ligne n'est pas encore activé sur ce site.</p>`);
+  const liv = f === 0 ? 'gratuite' : f === null ? 'à confirmer par téléphone' : fmt(f);
+  modal('Commande envoyée', `<div class="box"><b>Merci ${esc(o.client_nom)} !</b><br>Numéro de commande : <b>${o.ref}</b><br>Total : <b>${fmt(o.total)}</b>${f === null ? ' + livraison' : ''} · livraison ${liv}</div><p>Notre équipe prépare votre commande et vous contacte au ${esc(o.telephone)} pour la livraison.</p><p>Conservez ce numéro pour suivre votre commande.</p><button class="link" data-open="suivi">Suivre ma commande</button>${ONLINE ? '' : '<p class="note err">Mode démonstration : la base de données n\'est pas encore branchée, cette commande n\'est pas transmise à la boutique.</p>'}`);
+}
+async function track(num){
+  const out = $('#track');
+  out.innerHTML = '<p class="empty">Recherche…</p>';
+  let o = null;
+  try {
+    if (ONLINE) { const r = await fetch(CFG.SUPABASE_URL + '/rest/v1/rpc/bio_track', {method: 'POST', headers: {apikey: CFG.SUPABASE_ANON_KEY, Authorization: 'Bearer ' + CFG.SUPABASE_ANON_KEY, 'Content-Type': 'application/json'}, body: JSON.stringify({p_ref: num})}); const d = await r.json(); o = Array.isArray(d) ? d[0] : null; }
+    else o = store.get('bio_orders_demo', []).find(x => x.ref === num) || null;
+  } catch (e) { out.innerHTML = '<p class="empty">Impossible de vérifier pour le moment. Réessayez dans un instant.</p>'; return; }
+  if (!$('#track')) return;
+  out.innerHTML = o ? `<div class="box"><b>Commande ${esc(o.ref)}</b><br>Passée le ${new Date(o.created_at).toLocaleDateString('fr-FR')} · ${fmt(o.total)}<br>Statut : <b>${STATUTS[o.statut] || esc(o.statut)}</b></div>` : '<p class="empty">Aucune commande trouvée avec ce numéro.</p>';
 }
 
 /* ---------- Événements ---------- */
@@ -588,7 +689,7 @@ document.addEventListener('click', e => {
   else if (d.qty) { const [id, q] = d.qty.split(':'); if (q === '0') delete cart[id]; else { cart[id] = (cart[id] || 0) + +q; if (cart[id] <= 0) delete cart[id]; } renderCart(); }
   else if (d.open) { e.preventDefault(); $('#nav').classList.remove('open'); openThing(d.open); }
   else if ('close' in d) closeAll();
-  else if (d.act === 'logout') { localStorage.removeItem('gb_user'); closeAll(); notify('Vous êtes déconnecté'); }
+  else if (d.act === 'gps') locate();
   else if (t.id === 'checkout') checkout();
 });
 document.addEventListener('input', e => { if (e.target.id === 'q') search(e.target.value); });
@@ -596,12 +697,9 @@ document.addEventListener('submit', e => {
   e.preventDefault();
   const f = e.target;
   if (f.id === 'news') { f.reset(); notify('Merci ! Vous êtes bien abonné.'); }
-  else if (f.id === 'f-account') { store.set('gb_user', {nom: $('#an').value.trim(), email: $('#ae').value.trim()}); account(); notify('Votre espace est créé'); }
+  else if (f.id === 'f-order') placeOrder();
   else if (f.id === 'f-contact') { closeAll(); notify('Merci ! Votre message a bien été pris en compte.'); }
-  else if (f.id === 'f-track') {
-    const num = $('#num').value.trim().toUpperCase(), o = store.get('gb_orders', []).find(x => x.n === num);
-    $('#track').innerHTML = o ? `<div class="box"><b>Commande ${esc(o.n)}</b><br>Passée le ${esc(o.date)} · ${o.items} article(s) · ${fmt(o.total)}<br>Statut : <b>en préparation</b></div>` : '<p class="empty">Aucune commande trouvée avec ce numéro.</p>';
-  }
+  else if (f.id === 'f-track') track($('#num').value.trim().toUpperCase());
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => $('#nav').classList.remove('open')));

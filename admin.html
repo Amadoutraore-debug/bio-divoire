@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Commandes — Bio d’Ivoire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b260d;--card:#133a17;--line:#2f6b2a;--green:#6aa91f;--green-d:#4d8a16;--lime:#a4d233;--yellow:#f7c520;--cream:#f5f1ea;--ink:#17300f;--muted:#c9d6c5;--red:#b3261e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:#fff;line-height:1.5;min-height:100vh}
+a{color:inherit}
+button{font:inherit;cursor:pointer;border:0}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+header{background:#0f3212;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700}.brand em{font-style:normal;color:var(--lime)}.brand small{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+.hb{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:linear-gradient(180deg,#7bb82a,#5c9a18);color:#fff;font-weight:600;font-size:13px;padding:8px 14px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.ghost{background:none;border:1.5px solid var(--line)}
+.btn.y{background:var(--yellow);color:var(--ink)}
+.btn.red{background:none;border:1.5px solid #d9776f;color:#f3b1ab}
+.btn:disabled{opacity:.5;cursor:default}
+.demo{background:#5a4300;color:#ffe9a8;font-size:13px;padding:9px 0;text-align:center}
+.alert{background:var(--yellow);color:var(--ink);font-weight:600;font-size:14px;padding:10px 0;text-align:center;display:none;cursor:pointer}
+.alert.show{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.stat{background:var(--card);border:1.5px solid #23561f;border-radius:12px;padding:12px 14px}
+.stat b{display:block;font-size:22px;line-height:1.2}.stat span{font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--card);color:#fff;border:1.5px solid #23561f;border-radius:30px;padding:6px 14px;font-size:13px;font-weight:500}
+.tab.on{background:var(--green);border-color:var(--green)}
+.orders{display:grid;gap:12px;padding-bottom:40px}
+.order{background:var(--cream);color:var(--ink);border-radius:14px;padding:16px 18px;border-left:6px solid #9aa593}
+.order.nouvelle{border-left-color:var(--yellow)}.order.preparation{border-left-color:#2f7fd1}.order.livraison{border-left-color:#8a4fd1}.order.livree{border-left-color:var(--green)}.order.annulee{border-left-color:var(--red);opacity:.7}
+.order.flash{animation:flash 1.2s 3}
+@keyframes flash{50%{background:#fff3bf}}
+.oh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.oh h3{font-size:17px}.oh small{display:block;font-size:12px;color:#5e6b58;font-weight:400}
+.pill{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:4px 10px;border-radius:20px;background:#e2dccf}
+.nouvelle .pill{background:var(--yellow)}.preparation .pill{background:#cfe3f8}.livraison .pill{background:#e3d4f7}.livree .pill{background:#d6ecb6}.annulee .pill{background:#f6d3cf}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.blk h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:#5e6b58;margin-bottom:4px}
+.blk p{font-size:14px}
+.blk a{color:var(--green-d);font-weight:600}
+.items{list-style:none;font-size:14px}
+.items li{display:flex;justify-content:space-between;gap:10px;padding:3px 0;border-bottom:1px dashed #ddd6c7}
+.sum{font-size:14px;margin-top:8px}.sum div{display:flex;justify-content:space-between}.sum .t{font-weight:700;font-size:16px;margin-top:4px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.acts .btn{font-size:12.5px;padding:7px 12px}
+.acts .lk{background:#e7e1d5;color:var(--ink)}
+.acts .cancel{background:none;color:var(--red);text-decoration:underline;padding:7px 4px}
+.empty{text-align:center;color:var(--muted);padding:50px 0}
+.login{max-width:400px;margin:60px auto;background:var(--cream);color:var(--ink);border-radius:16px;padding:26px}
+.login h2{font-size:20px;margin-bottom:6px}.login p{font-size:13.5px;color:#4c5a45;margin-bottom:8px}
+.login label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
+.login input{width:100%;font:inherit;font-size:14px;padding:10px 14px;border:1.5px solid #cfc8b8;border-radius:10px}
+.login .btn{width:100%;justify-content:center;margin-top:18px;padding:11px}
+.login .sw{background:none;color:var(--green-d);font-weight:600;text-decoration:underline;font-size:13px;margin-top:14px}
+.msg{font-size:13px;margin-top:12px;font-weight:600}.msg.err{color:var(--red)}.msg.ok{color:#2f6b17}
+code{background:#e7e1d5;padding:2px 6px;border-radius:5px;font-size:12px;word-break:break-all}
+[hidden]{display:none!important}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="demo" id="demo" hidden><div class="wrap">Mode démonstration : la base de données n'est pas branchée. Seules les commandes passées sur cet appareil s'affichent ici.</div></div>
+<div class="alert" id="alert"><div class="wrap" id="alert-txt"></div></div>
+
+<header><div class="wrap">
+  <div class="brand"><em>Bio</em> d’Ivoire<small>Espace administrateur — commandes</small></div>
+  <div class="hb" id="hb" hidden>
+    <button class="btn y" id="notif">Activer les notifications</button>
+    <a class="btn ghost" href="index.html">Voir la boutique</a>
+    <button class="btn ghost" id="logout" hidden>Se déconnecter</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <section class="login" id="login" hidden>
+    <h2 id="lt">Connexion administrateur</h2>
+    <p id="lp">Connectez-vous pour voir les commandes.</p>
+    <form id="f-login">
+      <label for="le">E-mail</label><input id="le" type="email" required autocomplete="username">
+      <label for="lw">Mot de passe</label><input id="lw" type="password" required minlength="8" autocomplete="current-password">
+      <button class="btn" id="lb">Se connecter</button>
+    </form>
+    <button class="sw" id="sw">Première fois ? Créer le compte administrateur</button>
+    <p class="msg" id="lm"></p>
+  </section>
+
+  <section id="board" hidden>
+    <div class="stats" id="stats"></div>
+    <div class="tabs" id="tabs"></div>
+    <div class="orders" id="orders"></div>
+  </section>
+</main>
+
+<script src="config.js?v=1"></script>
+<script>
+const $ = s => document.querySelector(s);
+const CFG = window.BIO_CONFIG || {}, ONLINE = !!(CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY);
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => Math.round(n).toLocaleString('fr-FR').replace(/\s/g, ' ') + ' FCFA';
+const LABEL = {nouvelle: 'Nouvelle', preparation: 'En préparation', livraison: 'En livraison', livree: 'Livrée', annulee: 'Annulée'};
+const NEXT = {nouvelle: ['preparation', 'Commencer la préparation'], preparation: ['livraison', 'Partir en livraison'], livraison: ['livree', 'Marquer comme livrée']};
+const TABS = [['toutes', 'Toutes'], ['nouvelle', 'Nouvelles'], ['encours', 'En cours'], ['livree', 'Livrées'], ['annulee', 'Annulées']];
+let sb = null, orders = [], tab = 'toutes', known = null, unread = 0, signup = false;
+const baseTitle = document.title;
+
+/* ---------- Affichage ---------- */
+function wa(tel){ let d = tel.replace(/\D/g, ''); if (d.length === 10) d = '225' + d; return 'https://wa.me/' + d; }
+function card(o){
+  const d = new Date(o.created_at), nx = NEXT[o.statut];
+  const items = (o.articles || []).map(a => `<li><span>${esc(a.qte)} × ${esc(a.nom)} <small>(${esc(a.unite)})</small></span><b>${fmt(a.qte * a.prix)}</b></li>`).join('');
+  const liv = o.livraison === 0 ? 'Gratuite' : o.livraison == null ? 'À confirmer avec le client' : fmt(o.livraison);
+  const map = `https://www.google.com/maps?q=${o.lat},${o.lng}`, dir = `https://www.google.com/maps/dir/?api=1&destination=${o.lat},${o.lng}`;
+  return `<article class="order ${esc(o.statut)}" data-ref="${esc(o.ref)}">
+    <div class="oh"><h3>${esc(o.ref)}<small>${d.toLocaleDateString('fr-FR')} à ${d.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}</small></h3><span class="pill">${LABEL[o.statut] || esc(o.statut)}</span></div>
+    <div class="grid">
+      <div>
+        <div class="blk"><h4>Client</h4><p><b>${esc(o.client_nom)}</b><br><a href="tel:${esc(o.telephone.replace(/[^0-9+]/g, ''))}">${esc(o.telephone)}</a></p></div>
+        <div class="blk" style="margin-top:10px"><h4>Position de livraison</h4><p>${o.distance_km != null ? 'À environ ' + String(o.distance_km).replace('.', ',') + ' km de la boutique' : 'Distance inconnue'}${o.precision_m != null ? ' · précision ± ' + esc(o.precision_m) + ' m' : ''}<br><small>${esc(o.lat)}, ${esc(o.lng)}</small>${o.repere ? '<br>Repère : ' + esc(o.repere) : ''}</p></div>
+      </div>
+      <div class="blk"><h4>Produits commandés</h4><ul class="items">${items}</ul>
+        <div class="sum"><div><span>Sous-total</span><span>${fmt(o.sous_total)}</span></div><div><span>Livraison</span><span>${liv}</span></div><div class="t"><span>Total à encaisser</span><span>${fmt(o.total)}${o.livraison == null ? ' + livraison' : ''}</span></div></div>
+      </div>
+    </div>
+    <div class="acts">
+      ${nx ? `<button class="btn" data-set="${o.ref}:${nx[0]}">${nx[1]}</button>` : ''}
+      <a class="btn lk" href="${dir}" target="_blank" rel="noopener">Itinéraire</a>
+      <a class="btn lk" href="${map}" target="_blank" rel="noopener">Voir sur la carte</a>
+      <a class="btn lk" href="tel:${esc(o.telephone.replace(/[^0-9+]/g, ''))}">Appeler</a>
+      <a class="btn lk" href="${wa(o.telephone)}" target="_blank" rel="noopener">WhatsApp</a>
+      ${['nouvelle', 'preparation', 'livraison'].includes(o.statut) ? `<button class="btn cancel" data-set="${o.ref}:annulee">Annuler</button>` : ''}
+    </div>
+  </article>`;
+}
+function render(flashRef){
+  const today = new Date().toDateString(), isToday = o => new Date(o.created_at).toDateString() === today;
+  const cnt = s => orders.filter(o => o.statut === s).length;
+  const ca = orders.filter(o => isToday(o) && o.statut !== 'annulee').reduce((s, o) => s + o.total, 0);
+  $('#stats').innerHTML = `<div class="stat"><b>${cnt('nouvelle')}</b><span>Nouvelles commandes</span></div><div class="stat"><b>${cnt('preparation') + cnt('livraison')}</b><span>En cours</span></div><div class="stat"><b>${orders.filter(o => isToday(o)).length}</b><span>Commandes aujourd'hui</span></div><div class="stat"><b>${fmt(ca)}</b><span>Montant du jour</span></div>`;
+  $('#tabs').innerHTML = TABS.map(([k, l]) => `<button class="tab${k === tab ? ' on' : ''}" data-tab="${k}">${l}</button>`).join('');
+  const list = orders.filter(o => tab === 'toutes' || (tab === 'encours' ? ['preparation', 'livraison'].includes(o.statut) : o.statut === tab));
+  $('#orders').innerHTML = list.map(card).join('') || '<p class="empty">Aucune commande dans cette liste.</p>';
+  if (flashRef) { const el = document.querySelector(`[data-ref="${flashRef}"]`); if (el) el.classList.add('flash'); }
+}
+
+/* ---------- Notifications ---------- */
+function beep(){
+  try {
+    const a = new (window.AudioContext || window.webkitAudioContext)();
+    [0, .28, .56].forEach(t => { const o = a.createOscillator(), g = a.createGain(); o.frequency.value = t === .28 ? 1175 : 880; o.connect(g); g.connect(a.destination); g.gain.setValueAtTime(.25, a.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, a.currentTime + t + .22); o.start(a.currentTime + t); o.stop(a.currentTime + t + .24); });
+  } catch (e) {}
+}
+function alertNew(o){
+  unread++;
+  beep();
+  $('#alert-txt').textContent = unread > 1 ? `${unread} nouvelles commandes — touchez pour les voir` : `Nouvelle commande ${o.ref} — ${o.client_nom} — ${fmt(o.total)}`;
+  $('#alert').classList.add('show');
+  document.title = `(${unread}) Nouvelle commande — Bio d’Ivoire`;
+  try { if ('Notification' in window && Notification.permission === 'granted') new Notification('Nouvelle commande ' + o.ref, {body: `${o.client_nom} · ${o.telephone} · ${fmt(o.total)}`, tag: o.ref}); } catch (e) {}
+}
+function clearAlert(){ unread = 0; $('#alert').classList.remove('show'); document.title = baseTitle; }
+function refreshNotifBtn(){
+  const b = $('#notif');
+  if (!('Notification' in window)) { b.hidden = true; return; }
+  if (Notification.permission === 'granted') { b.textContent = 'Notifications activées ✓'; b.classList.remove('y'); b.classList.add('ghost'); }
+  else if (Notification.permission === 'denied') { b.textContent = 'Notifications bloquées'; b.disabled = true; }
+}
+
+/* ---------- Données ---------- */
+function setOrders(list, announce){
+  const fresh = known ? list.filter(o => !known.has(o.ref)) : [];
+  orders = list; known = new Set(list.map(o => o.ref));
+  render(fresh[0] && fresh[0].ref);
+  if (announce) fresh.reverse().forEach(alertNew);
+}
+async function load(announce){
+  if (!ONLINE) { let l = []; try { l = JSON.parse(localStorage.getItem('bio_orders_demo')) || []; } catch (e) {} return setOrders(l, announce); }
+  const {data, error} = await sb.from('bio_orders').select('*').order('created_at', {ascending: false}).limit(300);
+  if (!error) setOrders(data || [], announce);
+}
+async function setStatus(ref, statut){
+  if (statut === 'annulee' && !confirm('Annuler la commande ' + ref + ' ?')) return;
+  if (!ONLINE) {
+    const l = orders.map(o => o.ref === ref ? {...o, statut} : o);
+    try { localStorage.setItem('bio_orders_demo', JSON.stringify(l)); } catch (e) {}
+    return setOrders(l, false);
+  }
+  const {error} = await sb.from('bio_orders').update({statut}).eq('ref', ref);
+  if (error) alert("Le statut n'a pas pu être modifié : " + error.message);
+  load(false);
+}
+function start(){
+  $('#login').hidden = true; $('#board').hidden = false; $('#hb').hidden = false; $('#logout').hidden = !ONLINE;
+  refreshNotifBtn();
+  load(false);
+  if (ONLINE) {
+    sb.channel('bio-orders').on('postgres_changes', {event: '*', schema: 'public', table: 'bio_orders'}, () => load(true)).subscribe();
+    setInterval(() => load(true), 45000);
+  } else {
+    addEventListener('storage', e => { if (e.key === 'bio_orders_demo') load(true); });
+    setInterval(() => load(true), 5000);
+  }
+}
+
+/* ---------- Connexion ---------- */
+function say(t, cls){ const m = $('#lm'); m.innerHTML = t; m.className = 'msg ' + (cls || ''); }
+function showLogin(){ $('#login').hidden = false; $('#board').hidden = true; $('#hb').hidden = true; }
+async function enter(){
+  const {data: {user}} = await sb.auth.getUser();
+  if (!user) return showLogin();
+  const {data} = await sb.from('bio_admins').select('user_id').eq('user_id', user.id).maybeSingle();
+  if (data) return start();
+  showLogin();
+  $('#f-login').hidden = true; $('#sw').hidden = true; $('#logout').hidden = false; $('#hb').hidden = false; $('#notif').hidden = true;
+  $('#lt').textContent = 'Compte en attente d\'autorisation';
+  $('#lp').textContent = 'Votre compte est créé, mais il n\'est pas encore autorisé à voir les commandes.';
+  say(`Compte : ${esc(user.email)}<br>Identifiant : <code>${esc(user.id)}</code>`, 'ok');
+}
+async function init(){
+  if (!ONLINE) { $('#demo').hidden = false; return start(); }
+  await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); })
+    .catch(() => { showLogin(); say('Impossible de charger la connexion. Vérifiez votre accès à Internet.', 'err'); throw new Error('cdn'); });
+  sb = supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+  enter();
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-set],[data-tab],#notif,#logout,#sw,#alert');
+  if (!t) return;
+  if (t.dataset.set) { const [ref, st] = t.dataset.set.split(':'); setStatus(ref, st); }
+  else if (t.dataset.tab) { tab = t.dataset.tab; render(); }
+  else if (t.id === 'notif') { beep(); if ('Notification' in window) Notification.requestPermission().then(refreshNotifBtn); }
+  else if (t.id === 'logout') sb.auth.signOut().then(() => location.reload());
+  else if (t.id === 'alert') { clearAlert(); tab = 'nouvelle'; render(); scrollTo({top: 0, behavior: 'smooth'}); }
+  else if (t.id === 'sw') {
+    signup = !signup;
+    $('#lt').textContent = signup ? 'Créer le compte administrateur' : 'Connexion administrateur';
+    $('#lp').textContent = signup ? 'Choisissez l\'e-mail et le mot de passe du compte administrateur (8 caractères minimum).' : 'Connectez-vous pour voir les commandes.';
+    $('#lb').textContent = signup ? 'Créer le compte' : 'Se connecter';
+    $('#lw').autocomplete = signup ? 'new-password' : 'current-password';
+    t.textContent = signup ? 'J\'ai déjà un compte : me connecter' : 'Première fois ? Créer le compte administrateur';
+    say('');
+  }
+});
+document.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (e.target.id !== 'f-login') return;
+  const email = $('#le').value.trim(), password = $('#lw').value;
+  say('Un instant…');
+  const {data, error} = signup ? await sb.auth.signUp({email, password}) : await sb.auth.signInWithPassword({email, password});
+  if (error) return say(signup ? 'Le compte n\'a pas pu être créé : ' + esc(error.message) : 'E-mail ou mot de passe incorrect.', 'err');
+  if (signup && !data.session) return say('Compte créé. Ouvrez le lien de confirmation reçu par e-mail, puis connectez-vous.', 'ok');
+  say('');
+  enter();
+});
+addEventListener('focus', () => { if (unread && !$('#alert').classList.contains('show')) clearAlert(); });
+init();
+</script>
+</body>
+</html>
