@@ -453,11 +453,46 @@ const P = [
   {id:'corbeille',nom:'Corbeille de fruits',       prix:7500, u:'corbeille', cat:'Fruits',            img:'cat-fruits'},
   {id:'herbes',   nom:'Herbes aromatiques en pot', prix:2000,  u:'pot',       cat:'Herbes & verdures', img:'cat-herbes'},
   {id:'plateau',  nom:'Plateau fromage & lait',    prix:5500,  u:'plateau',   cat:'Laitiers & œufs',   img:'cat-laitiers'},
-  {id:'noix',     nom:'Mélange de noix',           prix:3500,  u:'250 g',     cat:'Noix & graines',    img:'cat-noix'}
+  {id:'noix',     nom:'Mélange de noix',           prix:3500,  u:'250 g',     cat:'Noix & graines',    img:'cat-noix'},
+  {id:'oignons', nom:'Oignons', prix:700, u:'kg', cat:'Légumes', img:'p-oignons'},
+  {id:'pommesdeterre', nom:'Pommes de terre', prix:800, u:'kg', cat:'Légumes', img:'p-pommesdeterre'},
+  {id:'aubergines', nom:'Aubergines', prix:600, u:'kg', cat:'Légumes', img:'p-aubergines'},
+  {id:'gombo', nom:'Gombo frais', prix:500, u:'500 g', cat:'Légumes', img:'p-gombo'},
+  {id:'piments', nom:'Piments frais', prix:500, u:'250 g', cat:'Légumes', img:'p-piments'},
+  {id:'chou', nom:'Chou vert', prix:600, u:'pièce', cat:'Légumes', img:'p-chou'},
+  {id:'poivrons', nom:'Poivrons', prix:1500, u:'kg', cat:'Légumes', img:'p-poivrons'},
+  {id:'concombres', nom:'Concombres', prix:500, u:'kg', cat:'Légumes', img:'p-concombres'},
+  {id:'ail', nom:'Ail', prix:700, u:'250 g', cat:'Légumes', img:'p-ail'},
+  {id:'patatedouce', nom:'Patates douces', prix:600, u:'kg', cat:'Légumes', img:'p-patatedouce'},
+  {id:'manioc', nom:'Manioc', prix:400, u:'kg', cat:'Légumes', img:'p-manioc'},
+  {id:'plantain', nom:'Bananes plantain', prix:1000, u:'kg', cat:'Légumes', img:'p-plantain'},
+  {id:'mais', nom:'Maïs frais', prix:500, u:'3 épis', cat:'Légumes', img:'p-mais'},
+  {id:'gingembre', nom:'Gingembre', prix:1500, u:'kg', cat:'Légumes', img:'p-gingembre'},
+  {id:'bananes', nom:'Bananes douces', prix:700, u:'kg', cat:'Fruits', img:'p-bananes'},
+  {id:'mangues', nom:'Mangues', prix:1000, u:'kg', cat:'Fruits', img:'p-mangues'},
+  {id:'ananas', nom:'Ananas', prix:800, u:'pièce', cat:'Fruits', img:'p-ananas'},
+  {id:'oranges', nom:'Oranges', prix:800, u:'kg', cat:'Fruits', img:'p-oranges'},
+  {id:'papaye', nom:'Papaye', prix:900, u:'pièce', cat:'Fruits', img:'p-papaye'},
+  {id:'pasteque', nom:'Pastèque', prix:1500, u:'pièce', cat:'Fruits', img:'p-pasteque'},
+  {id:'avocats', nom:'Avocats', prix:1200, u:'kg', cat:'Fruits', img:'p-avocats'},
+  {id:'citrons', nom:'Citrons', prix:900, u:'kg', cat:'Fruits', img:'p-citrons'},
+  {id:'coco', nom:'Noix de coco', prix:500, u:'pièce', cat:'Fruits', img:'p-coco'},
+  {id:'persil', nom:'Persil', prix:300, u:'botte', cat:'Herbes & verdures', img:'p-persil'},
+  {id:'menthe', nom:'Menthe fraîche', prix:300, u:'botte', cat:'Herbes & verdures', img:'p-menthe'},
+  {id:'basilic', nom:'Basilic', prix:400, u:'botte', cat:'Herbes & verdures', img:'p-basilic'},
+  {id:'laitue', nom:'Laitue', prix:500, u:'pièce', cat:'Herbes & verdures', img:'p-laitue'},
+  {id:'lait', nom:'Lait frais', prix:1000, u:'litre', cat:'Laitiers & œufs', img:'p-lait'},
+  {id:'yaourt', nom:'Yaourt nature', prix:600, u:'pot', cat:'Laitiers & œufs', img:'p-yaourt'},
+  {id:'fromage', nom:'Fromage', prix:3500, u:'250 g', cat:'Laitiers & œufs', img:'p-fromage'},
+  {id:'beurre', nom:'Beurre', prix:2000, u:'250 g', cat:'Laitiers & œufs', img:'p-beurre'},
+  {id:'arachides', nom:'Arachides', prix:1000, u:'kg', cat:'Noix & graines', img:'p-arachides'},
+  {id:'cajou', nom:'Noix de cajou', prix:3500, u:'250 g', cat:'Noix & graines', img:'p-cajou'},
+  {id:'amandes', nom:'Amandes', prix:4000, u:'250 g', cat:'Noix & graines', img:'p-amandes'},
+  {id:'sesame', nom:'Graines de sésame', prix:1200, u:'500 g', cat:'Noix & graines', img:'p-sesame'}
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
 const CATS = ['Tous', 'Légumes', 'Fruits', 'Herbes & verdures', 'Laitiers & œufs', 'Noix & graines'];
-const PER = 5, FREE = 30000;
+const PER = 10, FREE = 30000;
 let cart = store.get('gb_cart', {}), favs = store.get('gb_favs', []);
 for (const k of Object.keys(cart)) if (!byId[k]) delete cart[k];
 let filter = 'Tous', page = 0, showAll = false, timer;
